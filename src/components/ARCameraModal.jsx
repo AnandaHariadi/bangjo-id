@@ -485,6 +485,24 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     }
   };
 
+  const handlePrevSpot = () => {
+    gamelanAudio.playARBeaconPing();
+    setActiveSpot((prev) => {
+      const idx = ALL_SPOTS.findIndex(s => s.id === (prev?.id || ALL_SPOTS[0].id));
+      const prevIdx = (idx - 1 + ALL_SPOTS.length) % ALL_SPOTS.length;
+      return ALL_SPOTS[prevIdx];
+    });
+  };
+
+  const handleNextSpot = () => {
+    gamelanAudio.playARBeaconPing();
+    setActiveSpot((prev) => {
+      const idx = ALL_SPOTS.findIndex(s => s.id === (prev?.id || ALL_SPOTS[0].id));
+      const nextIdx = (idx + 1) % ALL_SPOTS.length;
+      return ALL_SPOTS[nextIdx];
+    });
+  };
+
   const handlePointerUp = () => {
     isPointerDown.current = false;
   };

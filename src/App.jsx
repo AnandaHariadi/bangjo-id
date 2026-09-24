@@ -8,6 +8,7 @@ import AIMakeoverSection from './components/AIMakeoverSection';
 import Footer from './components/Footer';
 import ARCameraModal from './components/ARCameraModal';
 import QRISModal from './components/QRISModal';
+import ErrorBoundary from './components/ErrorBoundary';
 import { Camera } from 'lucide-react';
 import { CULINARY_ITEMS } from './data/mockData';
 
@@ -89,13 +90,15 @@ export default function App() {
       </div>
 
       {/* AR Fullscreen Camera Modal with 7 3D Beacons and Gyroscope */}
-      <ARCameraModal 
-        isOpen={isARModalOpen} 
-        onClose={() => setIsARModalOpen(false)} 
-        defaultMode={arModalMode}
-        onOpenQRIS={handleOpenQRIS}
-        lang={lang}
-      />
+      <ErrorBoundary>
+        <ARCameraModal 
+          isOpen={isARModalOpen} 
+          onClose={() => setIsARModalOpen(false)} 
+          defaultMode={arModalMode}
+          onOpenQRIS={handleOpenQRIS}
+          lang={lang}
+        />
+      </ErrorBoundary>
 
       {/* Dynamic QRIS Checkout Modal */}
       <QRISModal 

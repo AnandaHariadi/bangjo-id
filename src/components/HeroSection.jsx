@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  Camera, Search, MapPin, Compass, ShieldCheck, Calendar, ArrowRight, 
+  Camera, Search, MapPin, Compass, ShieldCheck, Calendar, ArrowRight, ArrowUpRight,
   ChevronRight, CheckCircle2, QrCode, Globe, Building2, BookOpen, Layers,
   Store, Award, Navigation, Sparkles, Utensils, Smartphone, Wand2
 } from 'lucide-react';
@@ -219,145 +219,212 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
 
       </div>
 
-      {/* 3. FOUR CORE MODULES */}
-      <div className="relative bg-[#FAF9F7] bangjo-mesh-section border-t border-stone-200 overflow-hidden py-16 sm:py-20">
+      {/* 3. FOUR CORE MODULES - CORPORATE EDITORIAL PRESENTATION (Ref: media_1790258226133.png) */}
+      <div className="relative bg-[#FAF9F7] bangjo-mesh-section border-t border-stone-200 overflow-hidden py-16 sm:py-24">
         {/* Subtle Ambient Glowing Orbs */}
         <div className="absolute top-1/4 -left-32 w-80 h-80 rounded-full bg-red-500/10 blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-10 -right-32 w-80 h-80 rounded-full bg-blue-600/10 blur-3xl pointer-events-none"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#E31837] bg-red-50 border border-red-200 px-3 py-1 rounded-full">
-            {t.moduleTag}
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#002B49] tracking-tight mt-2">
-            {t.moduleHeading}
-          </h2>
-          <p className="text-xs sm:text-sm text-stone-500 mt-1">
-            {t.moduleSub}
-          </p>
-        </div>
-
-        {/* 4 Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
           
-          {/* 01: MODUL RITUAL */}
-          <div className="bg-white p-6 rounded-2xl border-t-4 border-t-[#E31837] border-x border-b border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(227,24,55,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-red-200 transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div>
-                <span className="font-mono text-[11px] font-bold text-[#E31837] tracking-wider px-2.5 py-1 bg-red-50/80 rounded-lg border border-red-100 inline-block">
-                  {t.mod1Tag}
-                </span>
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 bangjo-badge-gradient text-[#002B49] px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E31837]"></span>
+                <span>{t.moduleTag}</span>
               </div>
-
-              <div>
-                <h3 className="text-base font-bold text-[#002B49] group-hover:text-[#E31837] transition-colors leading-snug">
-                  {t.mod1Title}
-                </h3>
-                <p className="text-xs text-stone-500 leading-relaxed font-normal mt-2">
-                  {t.mod1Desc}
-                </p>
-              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#002B49] tracking-tight">
+                {t.moduleHeading}
+              </h2>
+              <p className="text-xs sm:text-sm text-stone-500 mt-1.5 leading-relaxed">
+                {t.moduleSub}
+              </p>
             </div>
-
-            <a 
-              href="#festival" 
-              className="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-[#002B49] group-hover:text-[#E31837] transition-colors group/link"
-            >
-              <span>{t.mod1Btn}</span>
-              <ChevronRight size={14} className="group-hover/link:translate-x-1 transition-transform text-stone-400 group-hover:text-[#E31837]" />
-            </a>
+            
+            {/* Quick Indicator Pills */}
+            <div className="hidden sm:flex items-center gap-2 shrink-0">
+              <span className="px-3 py-1.5 rounded-full bg-white border border-stone-200 text-[11px] font-bold text-stone-700 shadow-2xs">
+                4 Modul Terintegrasi
+              </span>
+              <span className="px-3 py-1.5 rounded-full bg-white border border-stone-200 text-[11px] font-bold text-[#E31837] shadow-2xs">
+                WebAR Realtime
+              </span>
+            </div>
           </div>
 
-          {/* 02: GASTRO-TOURISM */}
-          <div className="bg-white p-6 rounded-2xl border-t-4 border-t-[#9B1348] border-x border-b border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(0,84,166,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-blue-200 transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div>
-                <span className="font-mono text-[11px] font-bold text-[#0054A6] tracking-wider px-2.5 py-1 bg-blue-50/80 rounded-lg border border-blue-100 inline-block">
-                  {t.mod2Tag}
-                </span>
+          {/* Asymmetrical Editorial Composition: Cultural Anchor Spotlight (Left) + 4 Editorial Module Cards (Right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+            
+            {/* Left Column: Visual Research Anchor Card */}
+            <div className="lg:col-span-5 bg-[#002B49] rounded-3xl p-7 sm:p-9 text-white relative overflow-hidden flex flex-col justify-between shadow-xl border border-white/10 group min-h-[380px]">
+              {/* Ambient Red & Blue Corner Glow */}
+              <div className="absolute -top-16 -left-16 w-48 h-48 rounded-full bg-red-500/25 blur-3xl pointer-events-none"></div>
+              <div className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-[#00A3E0]/25 blur-3xl pointer-events-none"></div>
+              
+              <div className="relative z-10 space-y-4">
+                <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider text-white border border-white/20">
+                  <Sparkles size={12} className="text-[#00A3E0]" />
+                  <span>Laboratorium Spasial Budaya</span>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight select-none">
+                  Harmoni Adat, Rekayasa WebAR & Ekonomi Sirkular
+                </h3>
+
+                <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-normal">
+                  Inovasi pengabdian masyarakat internasional Informatics UPN Veteran Jawa Timur di Desa Wisata Penglipuran untuk menjaga keaslian tatanan arsitektur tradisional tanpa spanduk fisik komersial.
+                </p>
               </div>
 
-              <div>
-                <h3 className="text-base font-bold text-[#002B49] group-hover:text-[#0054A6] transition-colors leading-snug">
-                  {t.mod2Title}
-                </h3>
-                <p className="text-xs text-stone-500 leading-relaxed font-normal mt-2">
-                  {t.mod2Desc}
-                </p>
+              {/* Research Metrics & CTA */}
+              <div className="relative z-10 pt-6 mt-6 border-t border-white/15 space-y-6">
+                <div className="grid grid-cols-3 gap-2 text-center">
+                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                    <p className="text-base sm:text-lg font-black text-[#00A3E0]">100%</p>
+                    <p className="text-[9.5px] text-stone-300 leading-tight mt-0.5">Bebas Spanduk Fisik</p>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                    <p className="text-base sm:text-lg font-black text-amber-300">7 Titik</p>
+                    <p className="text-[9.5px] text-stone-300 leading-tight mt-0.5">Beacon Spasial</p>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                    <p className="text-base sm:text-lg font-black text-emerald-400">0%</p>
+                    <p className="text-[9.5px] text-stone-300 leading-tight mt-0.5">Potongan Kas Warga</p>
+                  </div>
+                </div>
+
+                <a 
+                  href="#festival"
+                  className="w-full bg-white hover:bg-stone-50 text-[#002B49] font-black text-xs sm:text-sm py-3.5 px-5 rounded-2xl shadow-md transition-all flex items-center justify-between group/btn active:scale-98"
+                >
+                  <span>Mulai Eksplorasi Interaktif</span>
+                  <ArrowRight size={16} className="text-[#E31837] group-hover/btn:translate-x-1.5 transition-transform" />
+                </a>
               </div>
             </div>
 
-            <a 
-              href="#culinary" 
-              className="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-[#002B49] group-hover:text-[#0054A6] transition-colors group/link"
-            >
-              <span>{t.mod2Btn}</span>
-              <ChevronRight size={14} className="group-hover/link:translate-x-1 transition-transform text-stone-400 group-hover:text-[#0054A6]" />
-            </a>
-          </div>
+            {/* Right Column: 4 Module Editorial Cards Grid (Matching media_1790258226133.png) */}
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+              
+              {/* 01: MODUL RITUAL (Featured Active Navy Card) */}
+              <div className="bg-[#002B49] text-white p-6 sm:p-7 rounded-3xl border border-white/10 shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
+                <div className="space-y-2">
+                  <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-wider text-red-300 uppercase block">
+                    {t.mod1Tag}
+                  </span>
 
-          {/* 03: STOREFRONT AR */}
-          <div className="bg-white p-6 rounded-2xl border-t-4 border-t-[#0054A6] border-x border-b border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(16,185,129,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-emerald-200 transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div>
-                <span className="font-mono text-[11px] font-bold text-emerald-700 tracking-wider px-2.5 py-1 bg-emerald-50/80 rounded-lg border border-emerald-100 inline-block">
-                  {t.mod3Tag}
-                </span>
+                  <h3 className="text-lg sm:text-xl font-black text-white leading-snug">
+                    {t.mod1Title}
+                  </h3>
+
+                  {/* Horizontal Underline Accent Bar (Ref: media_1790258226133.png) */}
+                  <div className="w-10 h-1 bg-[#E31837] rounded-full my-3 group-hover:w-16 transition-all duration-300"></div>
+
+                  <p className="text-xs text-stone-300 leading-relaxed font-normal">
+                    {t.mod1Desc}
+                  </p>
+                </div>
+
+                <a 
+                  href="#festival" 
+                  className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-bold text-white group-hover:text-red-300 transition-colors"
+                >
+                  <span>{t.mod1Btn}</span>
+                  <ArrowUpRight size={18} className="text-white group-hover:text-red-300 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </a>
               </div>
 
-              <div>
-                <h3 className="text-base font-bold text-[#002B49] group-hover:text-emerald-700 transition-colors leading-snug">
-                  {t.mod3Title}
-                </h3>
-                <p className="text-xs text-stone-500 leading-relaxed font-normal mt-2">
-                  {t.mod3Desc}
-                </p>
+              {/* 02: GASTRO-TOURISM (Crisp White Editorial Card) */}
+              <div className="bg-white text-stone-900 p-6 sm:p-7 rounded-3xl border border-stone-200/90 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
+                <div className="space-y-2">
+                  <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-wider text-[#0054A6] uppercase block">
+                    {t.mod2Tag}
+                  </span>
+
+                  <h3 className="text-lg sm:text-xl font-black text-[#002B49] leading-snug group-hover:text-[#0054A6] transition-colors">
+                    {t.mod2Title}
+                  </h3>
+
+                  {/* Horizontal Underline Accent Bar (Ref: media_1790258226133.png) */}
+                  <div className="w-10 h-1 bg-[#0054A6] rounded-full my-3 group-hover:w-16 transition-all duration-300"></div>
+
+                  <p className="text-xs text-stone-600 leading-relaxed font-normal">
+                    {t.mod2Desc}
+                  </p>
+                </div>
+
+                <a 
+                  href="#culinary" 
+                  className="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-[#002B49] group-hover:text-[#0054A6] transition-colors"
+                >
+                  <span>{t.mod2Btn}</span>
+                  <ArrowUpRight size={18} className="text-stone-400 group-hover:text-[#0054A6] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </a>
               </div>
+
+              {/* 03: STOREFRONT AR (Crisp White Editorial Card) */}
+              <div className="bg-white text-stone-900 p-6 sm:p-7 rounded-3xl border border-stone-200/90 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
+                <div className="space-y-2">
+                  <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-wider text-emerald-700 uppercase block">
+                    {t.mod3Tag}
+                  </span>
+
+                  <h3 className="text-lg sm:text-xl font-black text-[#002B49] leading-snug group-hover:text-emerald-700 transition-colors">
+                    {t.mod3Title}
+                  </h3>
+
+                  {/* Horizontal Underline Accent Bar (Ref: media_1790258226133.png) */}
+                  <div className="w-10 h-1 bg-emerald-600 rounded-full my-3 group-hover:w-16 transition-all duration-300"></div>
+
+                  <p className="text-xs text-stone-600 leading-relaxed font-normal">
+                    {t.mod3Desc}
+                  </p>
+                </div>
+
+                <a 
+                  href="#storefront" 
+                  className="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-[#002B49] group-hover:text-emerald-700 transition-colors"
+                >
+                  <span>{t.mod3Btn}</span>
+                  <ArrowUpRight size={18} className="text-stone-400 group-hover:text-emerald-700 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </a>
+              </div>
+
+              {/* 04: SPATIAL ADVISOR (Crisp White Editorial Card) */}
+              <div className="bg-white text-stone-900 p-6 sm:p-7 rounded-3xl border border-stone-200/90 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
+                <div className="space-y-2">
+                  <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-wider text-amber-700 uppercase block">
+                    {t.mod4Tag}
+                  </span>
+
+                  <h3 className="text-lg sm:text-xl font-black text-[#002B49] leading-snug group-hover:text-amber-700 transition-colors">
+                    {t.mod4Title}
+                  </h3>
+
+                  {/* Horizontal Underline Accent Bar (Ref: media_1790258226133.png) */}
+                  <div className="w-10 h-1 bg-amber-600 rounded-full my-3 group-hover:w-16 transition-all duration-300"></div>
+
+                  <p className="text-xs text-stone-600 leading-relaxed font-normal">
+                    {t.mod4Desc}
+                  </p>
+                </div>
+
+                <a 
+                  href="#advisor" 
+                  className="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-[#002B49] group-hover:text-amber-700 transition-colors"
+                >
+                  <span>{t.mod4Btn}</span>
+                  <ArrowUpRight size={18} className="text-stone-400 group-hover:text-amber-700 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </a>
+              </div>
+
             </div>
 
-            <a 
-              href="#storefront" 
-              className="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-[#002B49] group-hover:text-emerald-700 transition-colors group/link"
-            >
-              <span>{t.mod3Btn}</span>
-              <ChevronRight size={14} className="group-hover/link:translate-x-1 transition-transform text-stone-400 group-hover:text-emerald-700" />
-            </a>
-          </div>
-
-          {/* 04: SPATIAL ADVISOR */}
-          <div className="bg-white p-6 rounded-2xl border-t-4 border-t-[#1D4ED8] border-x border-b border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(245,158,11,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-amber-200 transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div>
-                <span className="font-mono text-[11px] font-bold text-amber-700 tracking-wider px-2.5 py-1 bg-amber-50/80 rounded-lg border border-amber-100 inline-block">
-                  {t.mod4Tag}
-                </span>
-              </div>
-
-              <div>
-                <h3 className="text-base font-bold text-[#002B49] group-hover:text-amber-700 transition-colors leading-snug">
-                  {t.mod4Title}
-                </h3>
-                <p className="text-xs text-stone-500 leading-relaxed font-normal mt-2">
-                  {t.mod4Desc}
-                </p>
-              </div>
-            </div>
-
-            <a 
-              href="#advisor" 
-              className="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-[#002B49] group-hover:text-amber-700 transition-colors group/link"
-            >
-              <span>{t.mod4Btn}</span>
-              <ChevronRight size={14} className="group-hover/link:translate-x-1 transition-transform text-stone-400 group-hover:text-amber-700" />
-            </a>
           </div>
 
         </div>
-
       </div>
-    </div>
 
       {/* 4. FEATURED CULINARY LISTINGS */}
       <div className="relative bg-[#FAF9F7] bangjo-mesh-section-alt border-t border-stone-200 overflow-hidden py-16 sm:py-24">
