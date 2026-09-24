@@ -7,8 +7,12 @@ export default function AIMakeoverSection({ lang = 'id' }) {
   const [makeoverState, setMakeoverState] = useState('after'); // 'before' | 'after'
 
   return (
-    <section id="advisor" className="py-16 md:py-24 bg-[#FAF9F7] border-t border-stone-200">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="advisor" className="relative py-16 md:py-24 bg-[#FAF9F7] bangjo-mesh-section-alt border-t border-stone-200 overflow-hidden">
+      {/* Subtle Ambient Glowing Orbs */}
+      <div className="absolute top-1/4 -right-32 w-80 h-80 rounded-full bg-red-500/10 blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-10 -left-32 w-80 h-80 rounded-full bg-blue-600/10 blur-3xl pointer-events-none"></div>
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8">

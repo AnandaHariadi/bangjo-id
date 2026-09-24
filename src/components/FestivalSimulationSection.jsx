@@ -28,8 +28,12 @@ export default function FestivalSimulationSection({ onOpenAR, onSelectDish, lang
   };
 
   return (
-    <section id="festival" className="py-16 md:py-24 bg-white border-t border-stone-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="festival" className="relative py-16 md:py-24 bg-[#FAF9F7] bangjo-mesh-section border-t border-stone-200 overflow-hidden">
+      {/* Subtle Ambient Glowing Orbs */}
+      <div className="absolute top-1/4 -left-32 w-80 h-80 rounded-full bg-red-500/10 blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-10 -right-32 w-80 h-80 rounded-full bg-blue-600/10 blur-3xl pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">

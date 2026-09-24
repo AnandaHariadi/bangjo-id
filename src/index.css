@@ -49,6 +49,20 @@
     radial-gradient(circle at 50% 100%, rgba(0, 163, 224, 0.08) 0%, transparent 60%);
 }
 
+.bangjo-mesh-section {
+  background-color: #FAF9F7;
+  background-image: 
+    radial-gradient(circle at 0% 25%, rgba(227, 24, 55, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 100% 75%, rgba(29, 78, 216, 0.10) 0%, transparent 45%);
+}
+
+.bangjo-mesh-section-alt {
+  background-color: #FAF9F7;
+  background-image: 
+    radial-gradient(circle at 100% 25%, rgba(227, 24, 55, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 0% 75%, rgba(29, 78, 216, 0.10) 0%, transparent 45%);
+}
+
 .bangjo-badge-gradient {
   background: linear-gradient(135deg, rgba(227, 24, 55, 0.08) 0%, rgba(29, 78, 216, 0.08) 100%);
   border: 1px solid rgba(227, 24, 55, 0.2);
