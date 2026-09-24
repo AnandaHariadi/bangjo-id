@@ -34,6 +34,9 @@ export default function Navbar({ onOpenAR, lang, setLang, activeSection, setActi
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-stone-200 shadow-xs">
       
+      {/* Signature BANGJO Top Gradient Accent Line */}
+      <div className="h-1 w-full bg-gradient-to-r from-[#E31837] via-[#85164B] to-[#1D4ED8]" />
+      
       {/* Corporate Top Utility Bar */}
       <div className="bg-[#002B49] text-white text-[11px] py-1.5 px-3 sm:px-6 lg:px-8 border-b border-white/10 font-medium">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1.5 sm:gap-3">

@@ -48,7 +48,6 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     {
       id: 'spot-festival',
       name: lang === 'id' ? 'Simulasi Prosesi Mepeed & Tari Pendet' : 'Mepeed Procession & Pendet Dance',
-      iconEmoji: '🌸',
       shortTitle: lang === 'id' ? 'Mepeed Adat' : 'Mepeed Ritual',
       azimuth: 180,
       latOffset: 0.00012,
@@ -70,7 +69,6 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     {
       id: 'spot-lawar',
       name: 'Warung Tradisional Ibu Wayan Murni',
-      iconEmoji: '🍗',
       shortTitle: 'Lawar Kuwir',
       azimuth: 225,
       latOffset: 0.00022,
@@ -93,7 +91,6 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     {
       id: 'spot-loloh',
       name: 'Kedai Herbal Loloh Cemcem Pak Made',
-      iconEmoji: '🍵',
       shortTitle: 'Loloh Cemcem',
       azimuth: 135,
       latOffset: 0.00031,
@@ -116,7 +113,6 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     {
       id: 'spot-photo',
       name: lang === 'id' ? 'Angkul-Angkul Tradisional (Pekarangan 08)' : 'Angkul-Angkul Gateway (Compound 08)',
-      iconEmoji: '🏛️',
       shortTitle: 'Angkul-Angkul',
       azimuth: 90,
       latOffset: 0.00042,
@@ -138,7 +134,6 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     {
       id: 'spot-craft',
       name: lang === 'id' ? 'Pusat Anyaman Bambu Tradisional Pak Ketut' : 'Pak Ketut Bamboo Craft Center',
-      iconEmoji: '🎋',
       shortTitle: 'Anyaman Bambu',
       azimuth: 45,
       latOffset: 0.00055,
@@ -160,7 +155,6 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     {
       id: 'spot-temple',
       name: 'Pura Penataran Agung (Utama Mandala)',
-      iconEmoji: '🛕',
       shortTitle: 'Pura Penataran',
       azimuth: 0,
       latOffset: 0.00070,
@@ -182,7 +176,6 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     {
       id: 'spot-bamboo-forest',
       name: lang === 'id' ? 'Gerbang Hutan Bambu Konservasi Keramat' : 'Sacred Bamboo Conservation Forest',
-      iconEmoji: '🌿',
       shortTitle: 'Hutan Bambu',
       azimuth: 270,
       latOffset: 0.00085,
@@ -548,79 +541,42 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
         )}
       </div>
 
-      {/* 4. CLEAN & SLEEK TOP BAR (Ref: media_1790256823904.png with distinct BANGJO styling) */}
-      <div className="p-3 sm:p-4 flex items-start justify-between z-30 pointer-events-auto bg-gradient-to-b from-black/85 via-black/45 to-transparent">
-        
-        {/* Top-Left: Brand + Lang Toggle + Title */}
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <span className="font-black text-xs tracking-wider text-amber-400 drop-shadow-sm">
-              {t.brand || 'BANGJO AR'}
-            </span>
-            {/* Inline Language Switcher [ID | EN] */}
-            <div className="inline-flex rounded-lg bg-black/60 border border-white/20 p-0.5 text-[10px] font-bold">
-              <button
-                onClick={() => setCurrentLang('id')}
-                className={`px-2 py-0.5 rounded-md transition-all ${
-                  currentLang === 'id' ? 'bg-[#00A3E0] text-white shadow-xs' : 'text-stone-300 hover:text-white'
-                }`}
-              >
-                ID
-              </button>
-              <button
-                onClick={() => setCurrentLang('en')}
-                className={`px-2 py-0.5 rounded-md transition-all ${
-                  currentLang === 'en' ? 'bg-[#00A3E0] text-white' : 'text-stone-300 hover:text-white'
-                }`}
-              >
-                EN
-              </button>
-            </div>
-          </div>
-          <h1 className="text-base sm:text-lg font-black text-white tracking-tight drop-shadow-md">
-            {t.title || 'AR Penglipuran Bali'}
-          </h1>
-        </div>
-
-        {/* Top-Right: Nearby Status & Compact Telemetry Cards + Close Button */}
-        <div className="flex flex-col items-end gap-1.5">
-          <div className="flex items-center gap-1.5">
-            {/* "● 1 objek dekat" status chip */}
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-emerald-400/40 text-emerald-300 text-[10px] sm:text-xs font-bold shadow-md">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>{t.nearbyObj || '1 objek dekat'}</span>
-            </div>
-
-            {/* Exit Close Button */}
+      {/* 4. CLEAN TOP BAR (Zero Distraction, No Redundant Telemetry) */}
+      <div className="p-3 sm:p-4 flex items-center justify-between z-30 pointer-events-auto bg-gradient-to-b from-black/80 to-transparent">
+        {/* Brand + Lang Toggle */}
+        <div className="flex items-center gap-2">
+          <span className="font-black text-xs tracking-wider text-white">BANGJO AR</span>
+          <div className="inline-flex rounded-md bg-white/10 p-0.5 text-[9px] font-bold text-white">
             <button
-              onClick={onClose}
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-md border border-white/25 text-white flex items-center justify-center transition-all active:scale-95"
-              title="Tutup AR"
+              onClick={() => setCurrentLang('id')}
+              className={`px-1.5 py-0.5 rounded transition-all ${
+                currentLang === 'id' ? 'bg-white/30 text-white' : 'text-stone-300'
+              }`}
             >
-              <X size={15} />
+              ID
+            </button>
+            <button
+              onClick={() => setCurrentLang('en')}
+              className={`px-1.5 py-0.5 rounded transition-all ${
+                currentLang === 'en' ? 'bg-white/30 text-white' : 'text-stone-300'
+              }`}
+            >
+              EN
             </button>
           </div>
-
-          {/* Compact Telemetry Stack (GPS, Akurasi, Objek) */}
-          <div className="bg-black/60 backdrop-blur-md border border-white/15 rounded-xl px-2.5 py-1.5 text-[9.5px] font-mono text-stone-300 space-y-0.5 text-right shadow-lg">
-            <div>
-              <span className="text-stone-400">GPS: </span>
-              <span className="text-emerald-300 font-bold">{t.gpsActive || 'GPS aktif'}</span>
-            </div>
-            <div>
-              <span className="text-stone-400">{t.accuracy || 'Akurasi'}: </span>
-              <span className="text-white font-bold">{gpsData.accuracy} m</span>
-            </div>
-            <div>
-              <span className="text-stone-400">{t.objectCount || 'Objek'}: </span>
-              <span className="text-cyan-300 font-bold">{ALL_SPOTS.findIndex(s => s.id === activeSpot.id) + 1}/{ALL_SPOTS.length}</span>
-            </div>
-          </div>
         </div>
 
+        {/* Exit Button */}
+        <button
+          onClick={onClose}
+          className="w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all active:scale-95"
+          title="Tutup AR"
+        >
+          <X size={15} />
+        </button>
       </div>
 
-      {/* 5. MAIN CONTENT AREA: 3D AR VIEWPORT & INTERACTIVE DETECTION */}
+      {/* 5. MAIN CONTENT AREA: 3D AR VIEWPORT (100% Focused on 3D Model, No Overlapping Badges) */}
       <div 
         className="flex-1 relative overflow-hidden flex flex-col justify-between"
         onMouseDown={handlePointerDown}
@@ -630,7 +586,6 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
         onTouchMove={handlePointerMove}
         onTouchEnd={handlePointerUp}
       >
-        
         {/* Three.js Transparent WebGL Overlay */}
         <div className="w-full h-full absolute inset-0 z-10 pointer-events-auto">
           <ThreeCanvas 
@@ -643,240 +598,131 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
           />
         </div>
 
-        {/* MID-LEFT SPOT BADGE (Ref: media_1790256823904.png) */}
-        <div className="absolute top-4 left-3 sm:left-5 z-20 pointer-events-none">
-          <div className="bg-black/70 backdrop-blur-md border border-white/20 px-3.5 py-2 rounded-2xl shadow-xl space-y-1">
-            <div className="w-6 h-1 rounded-full bg-emerald-400"></div>
-            <div className="text-white font-extrabold text-xs sm:text-sm tracking-wide">
-              {activeSpot.shortTitle}
-            </div>
-            <div className="text-[9px] text-cyan-300 font-mono">
-              {activeSpot.code} • {activeSpot.baseDist}m
-            </div>
-          </div>
-        </div>
-
-        {/* ELEGANT MINIMALIST RETICLE IN CENTER (No Clutter) */}
+        {/* Minimal Reticle Target in Center */}
         <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
-          <div className="relative w-40 h-40 sm:w-48 sm:h-48 flex items-center justify-center">
-            {/* Corner Targeting Brackets */}
-            <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-amber-400"></div>
-            <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-amber-400"></div>
-            <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-amber-400"></div>
-            <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-amber-400"></div>
-
-            {/* Subtle Center Reticle Dot */}
-            <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#00E5FF] animate-pulse"></div>
-
-            {/* Status Hint */}
-            <div className="absolute -bottom-5 bg-black/60 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/10 text-[9px] font-mono text-emerald-300 whitespace-nowrap">
-              ● {currentLang === 'id' ? '3D AKTIF • GESER UNTUK PINDAI SEKITAR' : '3D ACTIVE • SWIPE TO SCAN'}
-            </div>
+          <div className="relative w-36 h-36 flex items-center justify-center">
+            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-white/40"></div>
+            <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-white/40"></div>
+            <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-white/40"></div>
+            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-white/40"></div>
+            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></div>
           </div>
         </div>
 
-        {/* Minimal Compass Telemetry Strip */}
-        <div className="px-4 py-1 z-20 pointer-events-none flex justify-between items-center text-[9.5px] text-stone-300">
-          <span className="bg-black/50 backdrop-blur-md px-2.5 py-0.5 rounded-md border border-white/10 font-mono">
-            📍 {activeSpot.direction}
-          </span>
-          <span className="bg-[#002B49]/80 backdrop-blur-md px-2 py-0.5 rounded text-cyan-300 font-mono">
-            Kompas: {gpsData.heading}° ({getCompassDir(gpsData.heading)})
-          </span>
-        </div>
-
-        {/* FLOATING SHOW UI BUTTON (When UI is hidden, Ref: media_1790256823904.png) */}
+        {/* Floating Show UI Pill (Only visible when UI is hidden) */}
         {isUIHidden && (
           <div className="absolute bottom-6 right-4 sm:right-6 z-40">
             <button
               onClick={() => setIsUIHidden(false)}
-              className="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-stone-900 font-extrabold text-xs sm:text-sm px-5 py-3 rounded-full shadow-[0_4px_16px_rgba(245,158,11,0.5)] flex items-center gap-2 active:scale-95 transition-all"
+              className="bg-white/90 hover:bg-white text-stone-900 font-bold text-xs px-4 py-2 rounded-full shadow-lg flex items-center gap-1.5 active:scale-95 transition-all"
             >
-              <Eye size={16} />
-              <span>{t.showUI || 'Tampilkan UI'}</span>
+              <Eye size={14} />
+              <span>Tampilkan Info</span>
             </button>
           </div>
         )}
-
       </div>
 
-      {/* 6. CLEAN BOTTOM INTERACTION CONSOLE (Ref: media_1790256832096.png with distinct BANGJO styling) */}
+      {/* 6. COMPACT BOTTOM CONSOLE (Single card, ~110px height, No Clutter, No Emojis) */}
       {!isUIHidden && (
-        <div className="pb-4 pt-2 px-3 sm:px-6 z-30 pointer-events-auto bg-gradient-to-t from-black/95 via-black/75 to-transparent space-y-2 max-w-lg mx-auto w-full animate-in slide-in-from-bottom-6 duration-300">
-          
-          {/* Row 1: Action Pills (Letakkan ulang, Sembunyikan UI, Foto) */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handleRecalibrate}
-              className="flex-1 bg-emerald-600/90 hover:bg-emerald-500 text-white font-extrabold text-xs py-2.5 px-3 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5"
-            >
-              <RotateCcw size={14} />
-              <span>{t.recalibrate || 'Letakkan ulang'}</span>
-            </button>
-
-            <button
-              onClick={() => setIsUIHidden(true)}
-              className="flex-1 bg-black/60 hover:bg-black/80 border border-white/20 text-stone-200 font-bold text-xs py-2.5 px-3 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5"
-            >
-              <EyeOff size={14} />
-              <span>{t.hideUI || 'Sembunyikan UI'}</span>
-            </button>
-
-            <button
-              onClick={handleTakeSnapshot}
-              className="w-10 h-10 rounded-xl bg-black/60 hover:bg-black/80 border border-white/20 text-white flex items-center justify-center transition-all active:scale-95 shrink-0"
-              title="Foto AR"
-            >
-              <Camera size={16} />
-            </button>
-          </div>
-
-          {/* Row 2: Cultural Heritage Narrative Box */}
-          <div className="relative bg-[#001D33]/90 backdrop-blur-md border border-white/20 rounded-2xl p-3.5 space-y-2.5 shadow-2xl">
+        <div className="pb-4 pt-1 px-3 sm:px-6 z-30 pointer-events-auto max-w-md mx-auto w-full animate-in slide-in-from-bottom-4 duration-200">
+          <div className="bg-black/75 backdrop-blur-xl border border-white/15 rounded-2xl p-3.5 space-y-2.5 shadow-2xl">
             
-            {/* Top Toolbar inside Cultural Box */}
-            <div className="flex items-center justify-between gap-1.5 pb-2 border-b border-white/10">
-              
-              {/* ID / EN Pill */}
-              <div className="inline-flex rounded-lg bg-black/40 border border-white/15 p-0.5 text-[10px] font-bold">
-                <button
-                  onClick={() => setCurrentLang('id')}
-                  className={`px-2 py-0.5 rounded transition-all ${
-                    currentLang === 'id' ? 'bg-[#00A3E0] text-white' : 'text-stone-300'
-                  }`}
-                >
-                  ID
-                </button>
-                <button
-                  onClick={() => setCurrentLang('en')}
-                  className={`px-2 py-0.5 rounded transition-all ${
-                    currentLang === 'en' ? 'bg-[#00A3E0] text-white' : 'text-stone-300'
-                  }`}
-                >
-                  EN
-                </button>
+            {/* Header: Code + Name + Pager */}
+            <div className="flex items-center justify-between text-white border-b border-white/10 pb-2">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="font-mono text-[9px] font-bold px-2 py-0.5 rounded bg-white/10 text-stone-200 border border-white/10 shrink-0">
+                  {activeSpot.code}
+                </span>
+                <span className="font-extrabold text-xs sm:text-sm text-white truncate">
+                  {activeSpot.shortTitle}
+                </span>
+                <span className="text-[10px] text-stone-400 font-mono shrink-0">
+                  {activeSpot.baseDist}m
+                </span>
               </div>
 
-              {/* Action Buttons: Suara, Hadap */}
-              <div className="flex items-center gap-1.5">
-                <button
-                  onClick={() => isSpeaking ? handleStopVoice() : handlePlayVoice(activeSpot.desc)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
-                    isSpeaking 
-                      ? 'bg-rose-600 text-white animate-pulse' 
-                      : 'bg-white/15 hover:bg-white/25 text-white border border-white/20'
-                  }`}
+              {/* Landmark Pager < 5 / 7 > */}
+              <div className="flex items-center gap-1 shrink-0 font-mono text-[10px] text-stone-300">
+                <button 
+                  onClick={handlePrevSpot}
+                  className="w-6 h-6 rounded bg-white/10 hover:bg-white/20 flex items-center justify-center text-white active:scale-90 transition-all"
+                  title="Sebelumnya"
                 >
-                  <Volume2 size={13} className={isSpeaking ? 'text-white' : 'text-cyan-300'} />
-                  <span>{isSpeaking ? (t.stopVoice || 'Stop') : (t.voice || 'Suara')}</span>
+                  <ChevronLeft size={13} />
                 </button>
-
-                <button
-                  onClick={handleRecalibrate}
-                  className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-bold flex items-center gap-1"
+                <span className="px-1 font-bold text-white">
+                  {ALL_SPOTS.findIndex(s => s.id === activeSpot.id) + 1}/{ALL_SPOTS.length}
+                </span>
+                <button 
+                  onClick={handleNextSpot}
+                  className="w-6 h-6 rounded bg-white/10 hover:bg-white/20 flex items-center justify-center text-white active:scale-90 transition-all"
+                  title="Selanjutnya"
                 >
-                  <Compass size={13} className="text-amber-300" />
-                  <span>{t.reorient || 'Hadap'}</span>
+                  <ChevronRight size={13} />
                 </button>
               </div>
-
             </div>
 
-            {/* Content Details */}
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-amber-400 tracking-wider uppercase block">
-                INDONESIA • {activeSpot.category}
-              </span>
-              <h2 className="text-sm sm:text-base font-extrabold text-white leading-tight">
-                {activeSpot.name}
-              </h2>
-              <p className="text-[11px] sm:text-xs text-stone-200 leading-relaxed max-h-20 overflow-y-auto scrollbar-none">
-                {activeSpot.desc}
-              </p>
-            </div>
+            {/* Narrative summary (Clean 2 lines) */}
+            <p className="text-[11px] text-stone-300 leading-relaxed line-clamp-2">
+              {activeSpot.desc}
+            </p>
 
-            {/* Direct Action Button (QRIS or Detail) */}
-            <div className="pt-1">
+            {/* Bottom Actions Row */}
+            <div className="flex items-center gap-2 pt-0.5">
+              <button
+                onClick={handleRecalibrate}
+                className="px-2.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all shrink-0"
+                title="Pusatkan Objek 3D"
+              >
+                <RotateCcw size={12} />
+                <span>Letakkan Ulang</span>
+              </button>
+
+              <button
+                onClick={() => isSpeaking ? handleStopVoice() : handlePlayVoice(activeSpot.desc)}
+                className={`px-2.5 py-2 rounded-xl border text-[11px] font-bold flex items-center gap-1 active:scale-95 transition-all shrink-0 ${
+                  isSpeaking 
+                    ? 'bg-red-600 text-white border-red-500 animate-pulse' 
+                    : 'bg-white/10 hover:bg-white/20 border-white/15 text-white'
+                }`}
+              >
+                <Volume2 size={12} />
+                <span>{isSpeaking ? 'Hentikan' : 'Suara'}</span>
+              </button>
+
               {activeSpot.dish ? (
                 <button
                   onClick={() => {
                     onClose();
                     if (onOpenQRIS) onOpenQRIS(activeSpot.dish);
                   }}
-                  className="w-full bg-white hover:bg-stone-50 text-[#E31837] font-black text-xs py-2.5 px-4 rounded-xl shadow-lg flex items-center justify-center gap-2 active:scale-98 transition-all"
+                  className="flex-1 bg-white hover:bg-stone-50 text-[#E31837] font-black text-[11px] py-2 px-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 active:scale-95 transition-all whitespace-nowrap min-w-0"
                 >
-                  <QrCode size={15} />
-                  <span>Pesan {activeSpot.dish.name} (QRIS - Rp {activeSpot.dish.price.toLocaleString('id-ID')})</span>
+                  <QrCode size={12} className="shrink-0" />
+                  <span className="truncate">Pesan QRIS</span>
                 </button>
               ) : (
                 <button
                   onClick={handleTriggerInspect}
-                  className="w-full bg-white hover:bg-stone-50 text-[#002B49] font-black text-xs py-2.5 px-4 rounded-xl shadow-lg flex items-center justify-center gap-2 active:scale-98 transition-all"
+                  className="flex-1 bg-white hover:bg-stone-50 text-[#002B49] font-black text-[11px] py-2 px-3 rounded-xl shadow-md flex items-center justify-center gap-1.5 active:scale-95 transition-all whitespace-nowrap min-w-0"
                 >
-                  <Building2 size={15} className="text-[#0054A6]" />
-                  <span>{currentLang === 'id' ? 'Detail Filosofi & Arsitektur 3D' : '3D Architecture & Heritage Details'}</span>
+                  <Building2 size={12} className="shrink-0 text-[#0054A6]" />
+                  <span className="truncate">Detail 3D</span>
                 </button>
               )}
+
+              <button
+                onClick={() => setIsUIHidden(true)}
+                className="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-stone-300 flex items-center justify-center active:scale-95 transition-all shrink-0"
+                title="Sembunyikan Panel"
+              >
+                <EyeOff size={13} />
+              </button>
             </div>
 
           </div>
-
-          {/* Row 3: AI Voice Assistant Bar (Ref: media_1790256832096.png) */}
-          <div className="bg-black/60 backdrop-blur-md border border-white/15 rounded-xl p-2 flex items-center gap-2.5">
-            <button
-              onClick={handleAskAI}
-              className="bg-emerald-500 hover:bg-emerald-400 text-stone-900 font-extrabold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 shrink-0 active:scale-95 transition-all shadow-xs"
-            >
-              <Mic size={14} />
-              <span>Mic</span>
-            </button>
-            <div className="min-w-0 flex-1 text-[10.5px]">
-              <span className="font-bold text-white block truncate">{t.aiReady || 'AI Penglipuran siap'}</span>
-              <span className="text-stone-300 block truncate">{t.aiSub || 'Jawaban suara akan diputar otomatis.'}</span>
-            </div>
-          </div>
-
-          {/* Row 4: Landmark Selector Drawer Dropdown */}
-          <div className="pt-0.5">
-            <button
-              onClick={() => setIsSpotListOpen(!isSpotListOpen)}
-              className="w-full bg-black/60 hover:bg-black/80 border border-white/15 rounded-xl px-3 py-2 text-xs font-bold text-stone-200 flex items-center justify-between"
-            >
-              <span className="flex items-center gap-2">
-                <span>📍</span>
-                <span>{isSpotListOpen ? 'Tutup Pilihan Lokasi' : `▼ ${ALL_SPOTS.length} Titik Lokasi (${activeSpot.shortTitle})`}</span>
-              </span>
-              <ChevronDown size={14} className={`transform transition-transform ${isSpotListOpen ? 'rotate-180' : ''}`} />
-            </button>
-
-            {/* Landmark Pills List */}
-            {isSpotListOpen && (
-              <div className="mt-2 flex items-center gap-1.5 overflow-x-auto scrollbar-none py-1">
-                {ALL_SPOTS.map((spot) => {
-                  const isCurrent = activeSpot.id === spot.id;
-                  return (
-                    <button
-                      key={spot.id}
-                      onClick={() => {
-                        gamelanAudio.playARBeaconPing();
-                        setActiveSpot(spot);
-                        handlePlayVoice(spot.name);
-                      }}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 ${
-                        isCurrent
-                          ? 'bg-gradient-to-r from-[#E31837] via-[#85164B] to-[#1D4ED8] text-white shadow-lg ring-2 ring-white/50 scale-102'
-                          : 'bg-black/60 hover:bg-black/80 text-stone-200 border border-white/15'
-                      }`}
-                    >
-                      <span>{spot.iconEmoji}</span>
-                      <span>{spot.shortTitle}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
         </div>
       )}
 

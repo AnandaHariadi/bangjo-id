@@ -12,7 +12,8 @@ export default function AIMakeoverSection({ lang = 'id' }) {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 bg-amber-50 text-amber-800 border border-amber-200 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 bangjo-badge-gradient text-[#002B49] px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
             <span>{t.tag}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#002B49] tracking-tight">

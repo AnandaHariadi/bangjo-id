@@ -16,9 +16,13 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
     <section id="hero" className="bg-white">
       
       {/* 1. CORPORATE EDITORIAL HERO BANNER */}
-      <div className="relative bg-[#FAF9F7] border-b border-stone-200">
+      <div className="relative bg-[#FAF9F7] bangjo-mesh-hero border-b border-stone-200 overflow-hidden">
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20 lg:pt-14 lg:pb-28">
+        {/* Subtle Ambient Glowing Orbs */}
+        <div className="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-red-500/10 blur-3xl pointer-events-none"></div>
+        <div className="absolute top-1/3 -right-32 w-80 h-80 rounded-full bg-blue-600/10 blur-3xl pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20 lg:pt-14 lg:pb-28 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             
             {/* Left Column: Clear Strategic Copy */}
@@ -81,7 +85,7 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-2">
                 <button
                   onClick={onOpenAR}
-                  className="bg-[#E31837] hover:bg-[#B30E26] text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 tracking-wide uppercase active:scale-98"
+                  className="bg-gradient-to-r from-[#E31837] via-[#9B1348] to-[#1D4ED8] hover:opacity-95 text-white font-extrabold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 tracking-wide uppercase active:scale-98"
                 >
                   <Camera size={16} />
                   <span>{t.btnLaunchAR}</span>
@@ -202,7 +206,7 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
 
               <button
                 onClick={onOpenAR}
-                className="w-full bg-[#E31837] hover:bg-[#B30E26] text-white font-bold text-xs py-3 rounded shadow-xs transition-all flex items-center justify-center gap-2 uppercase tracking-wider"
+                className="w-full bg-gradient-to-r from-[#E31837] via-[#9B1348] to-[#1D4ED8] hover:opacity-95 text-white font-bold text-xs py-3 rounded shadow-xs transition-all flex items-center justify-center gap-2 uppercase tracking-wider active:scale-98"
               >
                 <Search size={14} />
                 <span>{t.btnStartExplore}</span>
@@ -234,7 +238,7 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           {/* 01: MODUL RITUAL */}
-          <div className="bg-white p-6 rounded-2xl border border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(227,24,55,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-red-200 transition-all duration-300 flex flex-col justify-between group">
+          <div className="bg-white p-6 rounded-2xl border-t-4 border-t-[#E31837] border-x border-b border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(227,24,55,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-red-200 transition-all duration-300 flex flex-col justify-between group">
             <div className="space-y-4">
               <div>
                 <span className="font-mono text-[11px] font-bold text-[#E31837] tracking-wider px-2.5 py-1 bg-red-50/80 rounded-lg border border-red-100 inline-block">
@@ -262,7 +266,7 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
           </div>
 
           {/* 02: GASTRO-TOURISM */}
-          <div className="bg-white p-6 rounded-2xl border border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(0,84,166,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-blue-200 transition-all duration-300 flex flex-col justify-between group">
+          <div className="bg-white p-6 rounded-2xl border-t-4 border-t-[#9B1348] border-x border-b border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(0,84,166,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-blue-200 transition-all duration-300 flex flex-col justify-between group">
             <div className="space-y-4">
               <div>
                 <span className="font-mono text-[11px] font-bold text-[#0054A6] tracking-wider px-2.5 py-1 bg-blue-50/80 rounded-lg border border-blue-100 inline-block">
@@ -290,7 +294,7 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
           </div>
 
           {/* 03: STOREFRONT AR */}
-          <div className="bg-white p-6 rounded-2xl border border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(16,185,129,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-emerald-200 transition-all duration-300 flex flex-col justify-between group">
+          <div className="bg-white p-6 rounded-2xl border-t-4 border-t-[#0054A6] border-x border-b border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(16,185,129,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-emerald-200 transition-all duration-300 flex flex-col justify-between group">
             <div className="space-y-4">
               <div>
                 <span className="font-mono text-[11px] font-bold text-emerald-700 tracking-wider px-2.5 py-1 bg-emerald-50/80 rounded-lg border border-emerald-100 inline-block">
@@ -318,7 +322,7 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
           </div>
 
           {/* 04: SPATIAL ADVISOR */}
-          <div className="bg-white p-6 rounded-2xl border border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(245,158,11,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-amber-200 transition-all duration-300 flex flex-col justify-between group">
+          <div className="bg-white p-6 rounded-2xl border-t-4 border-t-[#1D4ED8] border-x border-b border-stone-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04),0_1px_3px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_35px_-10px_rgba(245,158,11,0.12),0_1px_3px_rgba(0,0,0,0.04)] hover:-translate-y-1.5 hover:border-amber-200 transition-all duration-300 flex flex-col justify-between group">
             <div className="space-y-4">
               <div>
                 <span className="font-mono text-[11px] font-bold text-amber-700 tracking-wider px-2.5 py-1 bg-amber-50/80 rounded-lg border border-amber-100 inline-block">
@@ -350,53 +354,53 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
       </div>
 
       {/* 3.5. ELEGANT AR & 3D SPATIAL SHOWCASE CARD (Ref: media_1790256650332.png) */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
-        <div className="relative rounded-3xl sm:rounded-[36px] overflow-hidden p-8 sm:p-12 md:p-16 text-center bangjo-card-gradient shadow-[0_25px_60px_-15px_rgba(227,24,55,0.35),0_15px_30px_rgba(29,78,216,0.25)] border border-white/20">
+      <div className="max-w-xl mx-auto px-4 sm:px-6 pb-16 sm:pb-24">
+        <div className="relative rounded-3xl sm:rounded-[36px] overflow-hidden p-7 sm:p-10 md:p-12 text-center bangjo-card-gradient shadow-[0_25px_60px_-15px_rgba(227,24,55,0.4),0_15px_30px_rgba(29,78,216,0.3)] border border-white/20">
           
           {/* Subtle Ambient Glowing Orbs */}
-          <div className="absolute -top-16 -left-16 w-56 h-56 sm:w-72 sm:h-72 rounded-full bg-red-400/35 blur-3xl pointer-events-none"></div>
-          <div className="absolute -bottom-20 -right-20 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-blue-400/35 blur-3xl pointer-events-none"></div>
+          <div className="absolute -top-16 -left-16 w-56 h-56 rounded-full bg-red-400/35 blur-3xl pointer-events-none"></div>
+          <div className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-blue-400/35 blur-3xl pointer-events-none"></div>
           <div className="absolute top-1/2 -left-20 w-48 h-48 rounded-full bg-pink-500/20 blur-2xl pointer-events-none"></div>
           <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/10 pointer-events-none"></div>
 
           {/* Card Content (Centered, Crisp Typography) */}
-          <div className="relative z-10 max-w-2xl mx-auto space-y-4 sm:space-y-5">
+          <div className="relative z-10 space-y-3.5 sm:space-y-4">
             
             {/* Tag / Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-[10px] sm:text-xs font-extrabold tracking-wider uppercase shadow-xs">
-              <Sparkles size={13} className="text-amber-300 animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-[10px] sm:text-xs font-extrabold tracking-wider uppercase shadow-xs">
+              <Sparkles size={12} className="text-amber-300 animate-pulse" />
               <span>{t.ctaBanner?.tag}</span>
             </div>
 
             {/* Headline */}
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight select-none">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight select-none">
               {t.ctaBanner?.title}
             </h2>
 
             {/* Subtitle */}
-            <p className="text-xs sm:text-sm md:text-base text-white/90 leading-relaxed font-normal max-w-xl mx-auto">
+            <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-normal max-w-md mx-auto">
               {t.ctaBanner?.desc}
             </p>
 
-            {/* Two Center Action Buttons (Matching media_1790256650332.png) */}
-            <div className="pt-4 sm:pt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto w-full">
+            {/* Two Action Buttons Stacked Vertically (Exact Reference: media_1790256650332.png) */}
+            <div className="pt-3 sm:pt-4 flex flex-col items-center gap-3 w-full max-w-xs sm:max-w-sm mx-auto">
               
               {/* Primary: Pure White Pill Button with Red Text */}
               <button
                 onClick={onOpenAR}
-                className="w-full sm:w-auto min-w-[200px] bg-white hover:bg-stone-50 text-[#E31837] font-extrabold text-sm sm:text-base py-3.5 px-7 rounded-2xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.25)] hover:shadow-[0_14px_30px_-5px_rgba(0,0,0,0.35)] active:scale-98 transition-all flex items-center justify-center gap-2 group"
+                className="w-full bg-white hover:bg-stone-50 text-[#E31837] font-black text-sm sm:text-base py-3.5 px-6 rounded-2xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.25)] hover:shadow-[0_14px_30px_-5px_rgba(0,0,0,0.35)] active:scale-98 transition-all flex items-center justify-center gap-2 group whitespace-nowrap"
               >
-                <Camera size={18} className="text-[#E31837] group-hover:scale-110 transition-transform" />
-                <span>{t.ctaBanner?.btnPrimary}</span>
+                <Camera size={18} className="text-[#E31837] group-hover:scale-110 transition-transform shrink-0" />
+                <span className="whitespace-nowrap">{t.ctaBanner?.btnPrimary}</span>
               </button>
 
               {/* Secondary: Glassmorphism Outline Button */}
               <a
                 href="#festival"
-                className="w-full sm:w-auto min-w-[200px] bg-white/10 hover:bg-white/20 border-2 border-white/40 backdrop-blur-md text-white font-bold text-sm sm:text-base py-3.5 px-7 rounded-2xl shadow-sm hover:border-white/60 active:scale-98 transition-all flex items-center justify-center gap-2"
+                className="w-full bg-white/10 hover:bg-white/20 border-2 border-white/40 backdrop-blur-md text-white font-bold text-sm sm:text-base py-3.5 px-6 rounded-2xl shadow-sm hover:border-white/60 active:scale-98 transition-all flex items-center justify-center gap-2 whitespace-nowrap"
               >
-                <Navigation size={18} className="text-white" />
-                <span>{t.ctaBanner?.btnSecondary}</span>
+                <Navigation size={18} className="text-white shrink-0" />
+                <span className="whitespace-nowrap">{t.ctaBanner?.btnSecondary}</span>
               </a>
 
             </div>

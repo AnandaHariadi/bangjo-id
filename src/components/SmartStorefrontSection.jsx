@@ -17,7 +17,8 @@ export default function SmartStorefrontSection({ onOpenAR, onOpenQRIS, lang = 'i
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 bangjo-badge-gradient text-[#002B49] px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
             <span>{t.tag}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#002B49] tracking-tight">
@@ -77,7 +78,7 @@ export default function SmartStorefrontSection({ onOpenAR, onOpenQRIS, lang = 'i
               </span>
               <button
                 onClick={onOpenAR}
-                className="w-full sm:w-auto justify-center bg-[#E31837] hover:bg-[#B30E26] text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 shadow-sm"
+                className="w-full sm:w-auto justify-center bg-gradient-to-r from-[#E31837] via-[#9B1348] to-[#1D4ED8] hover:opacity-95 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 shadow-sm active:scale-98"
               >
                 <Smartphone size={13} />
                 <span>{t.btnOpenMobileAR}</span>
@@ -165,7 +166,7 @@ export default function SmartStorefrontSection({ onOpenAR, onOpenQRIS, lang = 'i
             <div className="pt-2">
               <button
                 onClick={() => onOpenQRIS(CULINARY_ITEMS[0])}
-                className="w-full bg-[#002B49] hover:bg-[#E31837] text-white font-bold py-2.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-xs shadow-md"
+                className="w-full bg-gradient-to-r from-[#002B49] via-[#0054A6] to-[#E31837] hover:opacity-95 text-white font-bold py-2.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-xs shadow-md active:scale-98"
               >
                 <QrCode size={14} />
                 <span>{lang === 'id' ? 'Simulasikan Pembayaran QRIS' : 'Simulate QRIS Payment'}</span>

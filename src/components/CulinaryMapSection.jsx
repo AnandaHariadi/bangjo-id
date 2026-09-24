@@ -15,7 +15,8 @@ export default function CulinaryMapSection({ onSelectMerchant, onSelectDish, onO
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 bg-blue-50 text-[#0054A6] border border-blue-200 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 bangjo-badge-gradient text-[#002B49] px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0054A6]"></span>
             <span>{t.tag}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#002B49] tracking-tight">
@@ -148,7 +149,7 @@ export default function CulinaryMapSection({ onSelectMerchant, onSelectDish, onO
 
               <button
                 onClick={() => onOpenQRIS(selectedDish)}
-                className="bg-[#E31837] hover:bg-[#B30E26] text-white font-bold text-xs px-4 py-2 rounded transition-all flex items-center gap-2 shadow-xs"
+                className="bg-gradient-to-r from-[#E31837] via-[#9B1348] to-[#1D4ED8] hover:opacity-95 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 shadow-sm active:scale-98"
               >
                 <span>{t.btnQrisOrder}</span>
                 <ArrowRight size={13} />

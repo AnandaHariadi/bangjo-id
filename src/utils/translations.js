@@ -71,7 +71,7 @@ export const translations = {
         title: 'Siap Menjelajahi Desa Penglipuran dalam Augmented Reality?',
         desc: 'Pindai pekarangan adat, arsitektur angkul-angkul, dan kuliner UMKM langsung melalui kamera ponsel Anda tanpa perlu unduh aplikasi tambahan.',
         btnPrimary: 'Aktivasi Kamera AR',
-        btnSecondary: 'Eksplorasi Katalog 3D & UMKM'
+        btnSecondary: 'Eksplorasi Katalog 3D'
       }
     },
     festival: {
@@ -298,7 +298,7 @@ export const translations = {
         title: 'Ready to Explore Penglipuran Village in Augmented Reality?',
         desc: 'Scan heritage compounds, angkul-angkul architecture, and local MSME cuisine directly through your phone camera without installing an app.',
         btnPrimary: 'Activate AR Camera',
-        btnSecondary: 'Explore 3D Catalog & MSME'
+        btnSecondary: 'Explore 3D Catalog'
       }
     },
     festival: {

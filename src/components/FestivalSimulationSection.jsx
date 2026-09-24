@@ -33,7 +33,8 @@ export default function FestivalSimulationSection({ onOpenAR, onSelectDish, lang
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 bg-red-50 text-[#E31837] border border-red-200 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 bangjo-badge-gradient text-[#002B49] px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E31837]"></span>
             <span>{t.tag}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#002B49] tracking-tight">
@@ -140,7 +141,7 @@ export default function FestivalSimulationSection({ onOpenAR, onSelectDish, lang
               </span>
               <button
                 onClick={onOpenAR}
-                className="w-full sm:w-auto justify-center bg-[#E31837] hover:bg-[#B30E26] text-white text-xs font-bold px-4 py-2 rounded-lg transition-all flex items-center gap-1.5"
+                className="w-full sm:w-auto justify-center bg-gradient-to-r from-[#E31837] via-[#9B1348] to-[#1D4ED8] hover:opacity-95 text-white text-xs font-bold px-4 py-2 rounded-lg transition-all flex items-center gap-1.5 shadow-sm active:scale-98"
               >
                 <Camera size={14} />
                 <span>{t.btnOpenFullAR}</span>

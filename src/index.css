@@ -33,13 +33,31 @@
   background: linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.85) 100%);
 }
 
-/* BANGJO Premium Red-to-Blue Mesh Gradient (Ref: media_1790256650332.png) */
+/* BANGJO Premium Red-to-Blue Multi-Layer Mesh Gradient (Ref: media_1790256650332.png) */
 .bangjo-card-gradient {
-  background: linear-gradient(135deg, #EF1E28 0%, #D81B60 34%, #60269E 68%, #1D4ED8 100%);
+  background: 
+    radial-gradient(circle at 12% 18%, rgba(255, 65, 85, 0.95) 0%, transparent 45%),
+    radial-gradient(circle at 88% 82%, rgba(37, 99, 235, 0.95) 0%, transparent 50%),
+    radial-gradient(circle at 50% 45%, rgba(139, 20, 74, 0.85) 0%, transparent 60%),
+    linear-gradient(135deg, #E31837 0%, #A2175B 38%, #581C87 70%, #1D4ED8 100%);
 }
 
-.bangjo-card-gradient-vibrant {
-  background: linear-gradient(135deg, #E60023 0%, #C2185B 32%, #4A148C 65%, #1565C0 100%);
+.bangjo-mesh-hero {
+  background: 
+    radial-gradient(circle at 0% 0%, rgba(227, 24, 55, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 100% 0%, rgba(29, 78, 216, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 50% 100%, rgba(0, 163, 224, 0.08) 0%, transparent 60%);
+}
+
+.bangjo-badge-gradient {
+  background: linear-gradient(135deg, rgba(227, 24, 55, 0.08) 0%, rgba(29, 78, 216, 0.08) 100%);
+  border: 1px solid rgba(227, 24, 55, 0.2);
+}
+
+.bangjo-text-gradient {
+  background: linear-gradient(135deg, #E31837 0%, #85164B 50%, #1D4ED8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Custom Scrollbar */

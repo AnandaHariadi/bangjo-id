@@ -6,8 +6,11 @@ export default function Footer({ lang = 'id' }) {
   const t = translations[lang]?.footer || translations.id.footer;
 
   return (
-    <footer className="bg-[#002B49] text-white border-t border-stone-800 pt-12 pb-8 sm:pt-16 sm:pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
+    <footer className="bg-[#002B49] text-white relative">
+      {/* Signature BANGJO Top Gradient Accent Line */}
+      <div className="h-1 bg-gradient-to-r from-[#E31837] via-[#85164B] to-[#1D4ED8] w-full"></div>
+      
+      <div className="pt-12 pb-8 sm:pt-16 sm:pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
         
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10">
