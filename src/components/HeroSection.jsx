@@ -113,42 +113,44 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
 
             </div>
 
-            {/* Right Column: 3D Interactive World Portal (Enlarged with Rich 3D Elevation) */}
+            {/* Right Column: 3D Interactive World Portal (BANGJO Mesh Gradient Chassis) */}
             <div className="lg:col-span-5 xl:col-span-5 relative mt-4 lg:mt-0 w-full max-w-full overflow-hidden">
-              <div className="relative bg-gradient-to-b from-[#003B64] via-[#002B49] to-[#00172A] rounded-2xl p-2 sm:p-3 border-t-2 border-t-sky-400 border-x border-stone-700/70 border-b-[5px] border-b-[#001424] shadow-[0_24px_55px_-10px_rgba(0,43,73,0.45),0_8px_20px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.2)] hover:shadow-[0_30px_65px_-10px_rgba(0,84,166,0.45),0_12px_28px_rgba(0,0,0,0.25)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden group">
+              <div className="relative bangjo-card-gradient rounded-3xl p-2.5 sm:p-3 border border-white/25 shadow-[0_24px_55px_-10px_rgba(227,24,55,0.35),0_12px_28px_rgba(0,43,73,0.3)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden group">
                 
-                {/* 3D Gloss Highlight Sheen at Top */}
-                <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/10 to-transparent pointer-events-none rounded-t-2xl"></div>
+                {/* Subtle Ambient Glowing Orbs */}
+                <div className="absolute -top-12 -left-12 w-44 h-44 rounded-full bg-red-400/35 blur-2xl pointer-events-none"></div>
+                <div className="absolute -bottom-12 -right-12 w-48 h-48 rounded-full bg-blue-400/35 blur-2xl pointer-events-none"></div>
+                <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/15 to-transparent pointer-events-none rounded-t-3xl"></div>
 
                 {/* 3D Header Bar */}
-                <div className="flex justify-between items-center px-2.5 sm:px-4 py-2 sm:py-2.5 bg-[#001D33]/90 backdrop-blur-md rounded-t-xl text-white text-xs border-b border-white/10 relative z-10 shadow-inner gap-2">
+                <div className="flex justify-between items-center px-3 sm:px-4 py-2 sm:py-2.5 bg-black/40 backdrop-blur-md rounded-t-2xl text-white text-xs border-b border-white/15 relative z-10 gap-2">
                   <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-                    <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#00A3E0] animate-pulse shadow-[0_0_8px_#00A3E0] shrink-0"></span>
+                    <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34D399] shrink-0"></span>
                     <span className="font-mono text-[9.5px] sm:text-[11px] font-extrabold tracking-wider text-white truncate">
                       {t.spatialTitle}
                     </span>
                   </div>
-                  <span className="text-[8.5px] sm:text-[10px] bg-sky-500/20 text-sky-300 border border-sky-400/30 px-2 sm:px-2.5 py-0.5 rounded-md font-bold shadow-xs whitespace-nowrap shrink-0">
+                  <span className="text-[8.5px] sm:text-[10px] bg-white/20 text-white border border-white/30 px-2 sm:px-2.5 py-0.5 rounded-md font-bold shadow-xs whitespace-nowrap shrink-0">
                     {t.spatialBadge}
                   </span>
                 </div>
 
                 {/* 3D WebGL Canvas (Responsive Viewport) */}
-                <div className="relative rounded-b-none overflow-hidden border-x border-black/40 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] w-full">
+                <div className="relative rounded-none overflow-hidden border-x border-black/40 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] w-full">
                   <ThreeCanvas mode="pokemon_go" height="280px" />
                 </div>
 
-                {/* Action Bar below 3D with Tactile Push Button */}
-                <div className="p-2.5 sm:p-3.5 bg-gradient-to-b from-[#001D33] to-[#001424] text-white flex items-center justify-between gap-2 text-xs rounded-b-xl border-t border-white/10 relative z-10">
-                  <div className="flex items-center gap-1.5 text-stone-300 text-[10px] sm:text-[11px] min-w-0 flex-1 overflow-hidden">
+                {/* Action Bar below 3D with Crisp White Action Button */}
+                <div className="p-2.5 sm:p-3 bg-black/40 backdrop-blur-md text-white flex items-center justify-between gap-2 text-xs rounded-b-2xl border-t border-white/15 relative z-10">
+                  <div className="flex items-center gap-1.5 text-stone-200 text-[10px] sm:text-[11px] min-w-0 flex-1 overflow-hidden">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></span>
                     <span className="truncate">{t.spatialSub}</span>
                   </div>
                   <button
                     onClick={onOpenAR}
-                    className="bg-gradient-to-b from-[#E31837] to-[#B30E26] hover:from-[#B30E26] hover:to-[#8E091C] text-white font-extrabold text-[10.5px] sm:text-xs px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg shadow-[0_3px_0_#8E091C,0_4px_10px_rgba(227,24,55,0.4)] active:translate-y-0.5 active:shadow-none flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap"
+                    className="bg-white hover:bg-stone-100 text-[#E31837] font-black text-[11px] sm:text-xs px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] active:scale-95 flex items-center gap-1.5 transition-all shrink-0 whitespace-nowrap"
                   >
-                    <Camera size={13} className="shrink-0" />
+                    <Camera size={13} className="shrink-0 text-[#E31837]" />
                     <span className="whitespace-nowrap">{t.btnFullscreenAR}</span>
                   </button>
                 </div>
@@ -345,6 +347,63 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
 
         </div>
 
+      </div>
+
+      {/* 3.5. ELEGANT AR & 3D SPATIAL SHOWCASE CARD (Ref: media_1790256650332.png) */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+        <div className="relative rounded-3xl sm:rounded-[36px] overflow-hidden p-8 sm:p-12 md:p-16 text-center bangjo-card-gradient shadow-[0_25px_60px_-15px_rgba(227,24,55,0.35),0_15px_30px_rgba(29,78,216,0.25)] border border-white/20">
+          
+          {/* Subtle Ambient Glowing Orbs */}
+          <div className="absolute -top-16 -left-16 w-56 h-56 sm:w-72 sm:h-72 rounded-full bg-red-400/35 blur-3xl pointer-events-none"></div>
+          <div className="absolute -bottom-20 -right-20 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-blue-400/35 blur-3xl pointer-events-none"></div>
+          <div className="absolute top-1/2 -left-20 w-48 h-48 rounded-full bg-pink-500/20 blur-2xl pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-black/10 pointer-events-none"></div>
+
+          {/* Card Content (Centered, Crisp Typography) */}
+          <div className="relative z-10 max-w-2xl mx-auto space-y-4 sm:space-y-5">
+            
+            {/* Tag / Badge */}
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-[10px] sm:text-xs font-extrabold tracking-wider uppercase shadow-xs">
+              <Sparkles size={13} className="text-amber-300 animate-pulse" />
+              <span>{t.ctaBanner?.tag}</span>
+            </div>
+
+            {/* Headline */}
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight select-none">
+              {t.ctaBanner?.title}
+            </h2>
+
+            {/* Subtitle */}
+            <p className="text-xs sm:text-sm md:text-base text-white/90 leading-relaxed font-normal max-w-xl mx-auto">
+              {t.ctaBanner?.desc}
+            </p>
+
+            {/* Two Center Action Buttons (Matching media_1790256650332.png) */}
+            <div className="pt-4 sm:pt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto w-full">
+              
+              {/* Primary: Pure White Pill Button with Red Text */}
+              <button
+                onClick={onOpenAR}
+                className="w-full sm:w-auto min-w-[200px] bg-white hover:bg-stone-50 text-[#E31837] font-extrabold text-sm sm:text-base py-3.5 px-7 rounded-2xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.25)] hover:shadow-[0_14px_30px_-5px_rgba(0,0,0,0.35)] active:scale-98 transition-all flex items-center justify-center gap-2 group"
+              >
+                <Camera size={18} className="text-[#E31837] group-hover:scale-110 transition-transform" />
+                <span>{t.ctaBanner?.btnPrimary}</span>
+              </button>
+
+              {/* Secondary: Glassmorphism Outline Button */}
+              <a
+                href="#festival"
+                className="w-full sm:w-auto min-w-[200px] bg-white/10 hover:bg-white/20 border-2 border-white/40 backdrop-blur-md text-white font-bold text-sm sm:text-base py-3.5 px-7 rounded-2xl shadow-sm hover:border-white/60 active:scale-98 transition-all flex items-center justify-center gap-2"
+              >
+                <Navigation size={18} className="text-white" />
+                <span>{t.ctaBanner?.btnSecondary}</span>
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
       </div>
 
       {/* 4. FEATURED CULINARY LISTINGS */}

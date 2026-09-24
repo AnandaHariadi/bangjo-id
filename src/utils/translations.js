@@ -65,7 +65,14 @@ export const translations = {
       registeredMerchant: 'Merchant Terdaftar:',
       otherSpices: 'lainnya',
       btn3dModel: '3D Model',
-      btnOrderQris: 'Pesan (QRIS)'
+      btnOrderQris: 'Pesan (QRIS)',
+      ctaBanner: {
+        tag: 'PENGALAMAN SPASIAL 3D & WEBAR',
+        title: 'Siap Menjelajahi Desa Penglipuran dalam Augmented Reality?',
+        desc: 'Pindai pekarangan adat, arsitektur angkul-angkul, dan kuliner UMKM langsung melalui kamera ponsel Anda tanpa perlu unduh aplikasi tambahan.',
+        btnPrimary: 'Aktivasi Kamera AR',
+        btnSecondary: 'Eksplorasi Katalog 3D & UMKM'
+      }
     },
     festival: {
       tag: 'Preservasi Budaya Digital',
@@ -173,7 +180,22 @@ export const translations = {
       btnClose: 'Tutup & Kembali ke Eksplorasi'
     },
     arModal: {
-      title: 'Kamera AR Spasial Penglipuran',
+      title: 'AR Penglipuran Bali',
+      brand: 'BANGJO AR',
+      nearbyObj: '1 objek dekat',
+      gpsActive: 'GPS aktif',
+      accuracy: 'Akurasi',
+      objectCount: 'Objek',
+      recalibrate: 'Letakkan ulang',
+      hideUI: 'Sembunyikan UI',
+      showUI: 'Tampilkan UI',
+      voice: 'Suara',
+      stopVoice: 'Stop',
+      askAI: 'Tanya AI',
+      reorient: 'Hadap',
+      aiReady: 'AI Penglipuran siap',
+      aiSub: 'Jawaban suara akan diputar otomatis.',
+      allLocations: 'Titik Lokasi Budaya',
       badge: 'Live AR Simulation',
       gyroOn: 'Giroskop ON',
       gyroOff: 'Giroskop OFF',
@@ -270,7 +292,14 @@ export const translations = {
       registeredMerchant: 'Registered Merchant:',
       otherSpices: 'others',
       btn3dModel: '3D Model',
-      btnOrderQris: 'Order (QRIS)'
+      btnOrderQris: 'Order (QRIS)',
+      ctaBanner: {
+        tag: '3D SPATIAL & WEBAR EXPERIENCE',
+        title: 'Ready to Explore Penglipuran Village in Augmented Reality?',
+        desc: 'Scan heritage compounds, angkul-angkul architecture, and local MSME cuisine directly through your phone camera without installing an app.',
+        btnPrimary: 'Activate AR Camera',
+        btnSecondary: 'Explore 3D Catalog & MSME'
+      }
     },
     festival: {
       tag: 'Digital Cultural Preservation',
@@ -378,7 +407,22 @@ export const translations = {
       btnClose: 'Close & Return to Exploration'
     },
     arModal: {
-      title: 'Penglipuran Spatial AR Camera',
+      title: 'AR Penglipuran Bali',
+      brand: 'BANGJO AR',
+      nearbyObj: '1 object nearby',
+      gpsActive: 'GPS active',
+      accuracy: 'Accuracy',
+      objectCount: 'Object',
+      recalibrate: 'Recalibrate',
+      hideUI: 'Hide UI',
+      showUI: 'Show UI',
+      voice: 'Voice',
+      stopVoice: 'Stop',
+      askAI: 'Ask AI',
+      reorient: 'Reorient',
+      aiReady: 'Penglipuran AI Ready',
+      aiSub: 'Voice answers play automatically.',
+      allLocations: 'Cultural Locations',
       badge: 'Live AR Simulation',
       gyroOn: 'Gyroscope ON',
       gyroOff: 'Gyroscope OFF',

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   X, Camera, Volume2, VolumeX, Compass, MapPin, Layers, Info, Check, 
-  ArrowRight, QrCode, Smartphone, Eye, Navigation, ShieldCheck, Radio, 
+  ArrowRight, QrCode, Smartphone, Eye, EyeOff, Navigation, ShieldCheck, Radio, 
   Activity, Map, Maximize2, Minimize2, Sparkles, Building2, ChevronRight, CheckCircle2,
-  ChevronLeft, Sparkle, Utensils, Award, Scan
+  ChevronLeft, Sparkle, Utensils, Award, Scan, Mic, RotateCcw, ChevronDown, ChevronUp
 } from 'lucide-react';
 import ThreeCanvas from './ThreeCanvas';
 import { gamelanAudio } from '../utils/audioSynth';
@@ -14,7 +14,11 @@ import { translations } from '../utils/translations';
 const PENGLIPURAN_BASE = { lat: -8.453300, lon: 115.357200 };
 
 export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_go', onOpenQRIS, lang = 'id' }) {
-  const t = (translations[lang] || translations.id).arModal;
+  const [currentLang, setCurrentLang] = useState(lang);
+  useEffect(() => {
+    setCurrentLang(lang);
+  }, [lang]);
+  const t = (translations[currentLang] || translations.id).arModal;
   const [viewMode, setViewMode] = useState('fullscreen_ar'); // 'fullscreen_ar' | 'split'
   const [cameraActive, setCameraActive] = useState(false);
   const [audioPlaying, setAudioPlaying] = useState(true);
@@ -22,6 +26,10 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
   const [isInspectModalOpen, setIsInspectModalOpen] = useState(false);
   const [snapshotFlash, setSnapshotFlash] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
+  const [isUIHidden, setIsUIHidden] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isSpotListOpen, setIsSpotListOpen] = useState(false);
+  const [calibrationKey, setCalibrationKey] = useState(0);
   const videoRef = useRef(null);
 
   // Real-time GPS Telemetry State
@@ -336,6 +344,10 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
       };
     } else {
       gamelanAudio.stop();
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      setIsSpeaking(false);
       if (videoRef.current && videoRef.current.srcObject) {
         const tracks = videoRef.current.srcObject.getTracks();
         tracks.forEach(track => track.stop());
@@ -349,6 +361,68 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     } else {
       gamelanAudio.startMode('balaganjur');
     }
+  };
+
+  const handlePlayVoice = (text) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = currentLang === 'id' ? 'id-ID' : 'en-US';
+      utterance.rate = 0.95;
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+      window.speechSynthesis.speak(utterance);
+    } else {
+      gamelanAudio.playCulturalSpeech(text);
+      setIsSpeaking(true);
+      setTimeout(() => setIsSpeaking(false), 5000);
+    }
+  };
+
+  const handleStopVoice = () => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    gamelanAudio.stopCulturalSpeech();
+    setIsSpeaking(false);
+  };
+
+  const handleRecalibrate = () => {
+    gamelanAudio.playARBeaconPing();
+    setCalibrationKey(prev => prev + 1);
+    setToastMessage(currentLang === 'id' ? 'Posisi 3D dikalibrasi ulang ke titik pandang!' : '3D Model recalibrated to your viewpoint!');
+    setTimeout(() => setToastMessage(null), 2500);
+  };
+
+  const handleAskAI = () => {
+    const aiFacts = {
+      'spot-festival': currentLang === 'id' 
+        ? 'Tradisi Mepeed mencerminkan falsafah Tri Hita Karana, di mana para penari berarak membawa persembahan suci canang sari sebagai ungkapan rasa syukur tulus kepada Sang Hyang Widhi.'
+        : 'The Mepeed tradition embodies the Tri Hita Karana philosophy, where dancers process carrying sacred offerings in gratitude to cosmic harmony.',
+      'spot-lawar': currentLang === 'id'
+        ? 'Lawar Kuwir dibuat dengan racikan 15 rempah Bumbu Genep dan daging entog segar pilihan, melambangkan kebersamaan dan gotong royong warga pekarangan.'
+        : 'Lawar Kuwir is blended with 15 ancestral Bumbu Genep spices and tender waterfowl, symbolizing customary unity and communal mutual aid.',
+      'spot-loloh': currentLang === 'id'
+        ? 'Loloh Cemcem diolah alami dari daun cemcem liar hutan desa Penglipuran, dicampur gula aren dan garam Kusamba untuk menjaga kebugaran tubuh secara organik.'
+        : 'Loloh Cemcem is freshly extracted from indigenous forest cemcem leaves, blended with palm nectar and Kusamba sea salt for organic vitality.',
+      'spot-photo': currentLang === 'id'
+        ? 'Arsitektur gerbang Angkul-Angkul memiliki proporsi ukuran yang seragam di seluruh desa, mencerminkan kesetaraan derajat sosial seluruh warga adat Penglipuran.'
+        : 'Angkul-Angkul gateways feature uniform dimensions across the village, symbolizing sacred social equality among all families.',
+      'spot-craft': currentLang === 'id'
+        ? 'Kerajinan anyaman bambu Penglipuran memanfaatkan bambu tali pilihan dari hutan konservasi desa dengan sistem rotasi panen yang ramah lingkungan.'
+        : 'Penglipuran woven bamboo crafts utilize sustainable bamboo harvested from the village conservation forest under eco-friendly customary law.',
+      'spot-temple': currentLang === 'id'
+        ? 'Pura Penataran Agung berdiri di zona Utama Mandala yang paling disucikan di utara (Kaja), menghadap Gunung Batur sebagai hulu spiritual desa.'
+        : 'Penataran Agung Temple stands in the most sacred elevated Utama Mandala zone facing Mount Batur as the village spiritual pinnacle.',
+      'spot-bamboo-forest': currentLang === 'id'
+        ? 'Hutan Bambu seluas 45 hektar dilindungi hukum adat Awig-Awig desa sebagai zona resapan mata air dan paru-paru ekologis Bali timur.'
+        : 'The 45-hectare sacred bamboo forest is strictly protected by Awig-Awig customary law to preserve natural aquifers and biodiversity.'
+    };
+    const answer = aiFacts[activeSpot.id] || activeSpot.desc;
+    handlePlayVoice(answer);
+    setToastMessage(currentLang === 'id' ? '🎙️ AI Budaya sedang berbicara...' : '🎙️ Cultural AI speaking...');
+    setTimeout(() => setToastMessage(null), 3000);
   };
 
   const handleSelectSpotFrom3D = (spotData) => {
@@ -378,7 +452,7 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     gamelanAudio.playARBeaconPing();
     setSnapshotFlash(true);
     setTimeout(() => setSnapshotFlash(false), 250);
-    setToastMessage(lang === 'id' ? 'Foto AR Budaya Berhasil Disimpan!' : 'Cultural AR Photo Captured!');
+    setToastMessage(currentLang === 'id' ? 'Foto AR Budaya Berhasil Disimpan!' : 'Cultural AR Photo Captured!');
     setTimeout(() => setToastMessage(null), 3000);
   };
 
@@ -474,43 +548,74 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
         )}
       </div>
 
-      {/* 4. CLEAN & UNCLUTTERED TOP BAR (Few Icons, Very Neat) */}
-      <div className="p-3 sm:p-4 flex items-center justify-between z-30 pointer-events-auto bg-gradient-to-b from-black/80 via-black/40 to-transparent">
+      {/* 4. CLEAN & SLEEK TOP BAR (Ref: media_1790256823904.png with distinct BANGJO styling) */}
+      <div className="p-3 sm:p-4 flex items-start justify-between z-30 pointer-events-auto bg-gradient-to-b from-black/85 via-black/45 to-transparent">
         
-        {/* Top-Left: Clean Close Button */}
-        <button
-          onClick={onClose}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-xs font-bold shadow-md hover:bg-black/80 transition-all active:scale-95"
-        >
-          <X size={15} />
-          <span>{lang === 'id' ? 'Tutup AR' : 'Exit'}</span>
-        </button>
-
-        {/* Top-Center: Status Indicator */}
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-white text-[11px] font-bold shadow-md">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>{lang === 'id' ? 'AR Spasial Penglipuran' : 'Penglipuran Spatial AR'}</span>
+        {/* Top-Left: Brand + Lang Toggle + Title */}
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="font-black text-xs tracking-wider text-amber-400 drop-shadow-sm">
+              {t.brand || 'BANGJO AR'}
+            </span>
+            {/* Inline Language Switcher [ID | EN] */}
+            <div className="inline-flex rounded-lg bg-black/60 border border-white/20 p-0.5 text-[10px] font-bold">
+              <button
+                onClick={() => setCurrentLang('id')}
+                className={`px-2 py-0.5 rounded-md transition-all ${
+                  currentLang === 'id' ? 'bg-[#00A3E0] text-white shadow-xs' : 'text-stone-300 hover:text-white'
+                }`}
+              >
+                ID
+              </button>
+              <button
+                onClick={() => setCurrentLang('en')}
+                className={`px-2 py-0.5 rounded-md transition-all ${
+                  currentLang === 'en' ? 'bg-[#00A3E0] text-white' : 'text-stone-300 hover:text-white'
+                }`}
+              >
+                EN
+              </button>
+            </div>
+          </div>
+          <h1 className="text-base sm:text-lg font-black text-white tracking-tight drop-shadow-md">
+            {t.title || 'AR Penglipuran Bali'}
+          </h1>
         </div>
 
-        {/* Top-Right: Essential Actions Only (Snapshot & Gamelan Audio) */}
-        <div className="flex items-center gap-1.5">
-          {/* Snapshot Shutter */}
-          <button
-            onClick={handleTakeSnapshot}
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-black/80 transition-all active:scale-90"
-            title="Ambil Foto AR"
-          >
-            <Camera size={15} />
-          </button>
+        {/* Top-Right: Nearby Status & Compact Telemetry Cards + Close Button */}
+        <div className="flex flex-col items-end gap-1.5">
+          <div className="flex items-center gap-1.5">
+            {/* "● 1 objek dekat" status chip */}
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-emerald-400/40 text-emerald-300 text-[10px] sm:text-xs font-bold shadow-md">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>{t.nearbyObj || '1 objek dekat'}</span>
+            </div>
 
-          {/* Gamelan Audio Toggle */}
-          <button 
-            onClick={toggleAudio}
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 border border-white/20 text-white flex items-center justify-center hover:bg-black/80 transition-all"
-            title="Audio Gamelan"
-          >
-            {audioPlaying ? <Volume2 size={14} className="text-cyan-400" /> : <VolumeX size={14} />}
-          </button>
+            {/* Exit Close Button */}
+            <button
+              onClick={onClose}
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/60 hover:bg-black/90 backdrop-blur-md border border-white/25 text-white flex items-center justify-center transition-all active:scale-95"
+              title="Tutup AR"
+            >
+              <X size={15} />
+            </button>
+          </div>
+
+          {/* Compact Telemetry Stack (GPS, Akurasi, Objek) */}
+          <div className="bg-black/60 backdrop-blur-md border border-white/15 rounded-xl px-2.5 py-1.5 text-[9.5px] font-mono text-stone-300 space-y-0.5 text-right shadow-lg">
+            <div>
+              <span className="text-stone-400">GPS: </span>
+              <span className="text-emerald-300 font-bold">{t.gpsActive || 'GPS aktif'}</span>
+            </div>
+            <div>
+              <span className="text-stone-400">{t.accuracy || 'Akurasi'}: </span>
+              <span className="text-white font-bold">{gpsData.accuracy} m</span>
+            </div>
+            <div>
+              <span className="text-stone-400">{t.objectCount || 'Objek'}: </span>
+              <span className="text-cyan-300 font-bold">{ALL_SPOTS.findIndex(s => s.id === activeSpot.id) + 1}/{ALL_SPOTS.length}</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -529,6 +634,7 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
         {/* Three.js Transparent WebGL Overlay */}
         <div className="w-full h-full absolute inset-0 z-10 pointer-events-auto">
           <ThreeCanvas 
+            key={`${activeSpot.id}-${calibrationKey}`}
             mode="pokemon_go" 
             height="100%" 
             useGyroscope={useGyroscope}
@@ -537,23 +643,22 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
           />
         </div>
 
-        {/* OVERHEAD DETECTION BANNER (Floating directly above detected 3D model) */}
-        <div className="pt-2 px-3 sm:px-4 z-20 pointer-events-none flex flex-col items-center justify-start">
-          <div className="bg-[#002B49]/90 border border-cyan-400/40 backdrop-blur-md px-3.5 py-1.5 rounded-2xl shadow-xl flex flex-col items-center gap-0.5 text-center max-w-sm">
-            <div className="flex items-center gap-1.5 text-xs text-white font-bold">
-              <span>{activeSpot.iconEmoji}</span>
-              <span className="truncate">{activeSpot.name}</span>
+        {/* MID-LEFT SPOT BADGE (Ref: media_1790256823904.png) */}
+        <div className="absolute top-4 left-3 sm:left-5 z-20 pointer-events-none">
+          <div className="bg-black/70 backdrop-blur-md border border-white/20 px-3.5 py-2 rounded-2xl shadow-xl space-y-1">
+            <div className="w-6 h-1 rounded-full bg-emerald-400"></div>
+            <div className="text-white font-extrabold text-xs sm:text-sm tracking-wide">
+              {activeSpot.shortTitle}
             </div>
-            <p className="text-[10px] text-stone-300">
-              {activeSpot.zone} • <span className="text-cyan-300 font-mono font-semibold">{activeSpot.direction}</span>
-            </p>
+            <div className="text-[9px] text-cyan-300 font-mono">
+              {activeSpot.code} • {activeSpot.baseDist}m
+            </div>
           </div>
         </div>
 
         {/* ELEGANT MINIMALIST RETICLE IN CENTER (No Clutter) */}
         <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
           <div className="relative w-40 h-40 sm:w-48 sm:h-48 flex items-center justify-center">
-            
             {/* Corner Targeting Brackets */}
             <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-amber-400"></div>
             <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-amber-400"></div>
@@ -564,8 +669,8 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
             <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#00E5FF] animate-pulse"></div>
 
             {/* Status Hint */}
-            <div className="absolute -bottom-5 bg-black/60 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/10 text-[9px] font-mono text-emerald-300">
-              ● {lang === 'id' ? '3D AKTIF • GESER UNTUK PINDAI SEKITAR' : '3D ACTIVE • SWIPE TO SCAN'}
+            <div className="absolute -bottom-5 bg-black/60 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-white/10 text-[9px] font-mono text-emerald-300 whitespace-nowrap">
+              ● {currentLang === 'id' ? '3D AKTIF • GESER UNTUK PINDAI SEKITAR' : '3D ACTIVE • SWIPE TO SCAN'}
             </div>
           </div>
         </div>
@@ -580,121 +685,200 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
           </span>
         </div>
 
+        {/* FLOATING SHOW UI BUTTON (When UI is hidden, Ref: media_1790256823904.png) */}
+        {isUIHidden && (
+          <div className="absolute bottom-6 right-4 sm:right-6 z-40">
+            <button
+              onClick={() => setIsUIHidden(false)}
+              className="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-stone-900 font-extrabold text-xs sm:text-sm px-5 py-3 rounded-full shadow-[0_4px_16px_rgba(245,158,11,0.5)] flex items-center gap-2 active:scale-95 transition-all"
+            >
+              <Eye size={16} />
+              <span>{t.showUI || 'Tampilkan UI'}</span>
+            </button>
+          </div>
+        )}
+
       </div>
 
-      {/* 6. CLEAN BOTTOM INTERACTION CONSOLE & LANDMARK SELECTOR */}
-      <div className="pb-4 pt-2 px-3 sm:px-6 z-30 pointer-events-auto bg-gradient-to-t from-black/80 via-black/40 to-transparent space-y-2.5">
-        
-        {/* Horizontal Quick Landmark Switcher (Pills) */}
-        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-1 justify-start sm:justify-center">
-          {ALL_SPOTS.map((spot) => {
-            const isCurrent = activeSpot.id === spot.id;
-            return (
-              <button
-                key={spot.id}
-                onClick={() => {
-                  gamelanAudio.playARBeaconPing();
-                  setActiveSpot(spot);
-                }}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 ${
-                  isCurrent
-                    ? 'bg-gradient-to-r from-[#E31837] to-[#B30E26] text-white shadow-lg ring-2 ring-white/40 scale-102'
-                    : 'bg-black/50 hover:bg-black/70 text-stone-200 border border-white/15'
-                }`}
-              >
-                <span>{spot.iconEmoji}</span>
-                <span>{spot.shortTitle}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Primary Indonesian Cultural Action Buttons */}
-        <div className="flex items-center gap-2 max-w-md mx-auto w-full">
+      {/* 6. CLEAN BOTTOM INTERACTION CONSOLE (Ref: media_1790256832096.png with distinct BANGJO styling) */}
+      {!isUIHidden && (
+        <div className="pb-4 pt-2 px-3 sm:px-6 z-30 pointer-events-auto bg-gradient-to-t from-black/95 via-black/75 to-transparent space-y-2 max-w-lg mx-auto w-full animate-in slide-in-from-bottom-6 duration-300">
           
-          {/* Cultural Narration Audio */}
-          <button
-            onClick={() => gamelanAudio.playCulturalSpeech(activeSpot.desc)}
-            className="flex-1 bg-white/15 hover:bg-white/25 border border-white/25 text-white font-bold text-xs py-3 px-3 rounded-xl shadow-md transition-all active:scale-98 flex items-center justify-center gap-1.5"
-            title="Dengarkan Suara Budaya"
-          >
-            <Volume2 size={15} className="text-cyan-400 shrink-0" />
-            <span className="truncate">{lang === 'id' ? 'Suara Narasi' : 'Audio Guide'}</span>
-          </button>
+          {/* Row 1: Action Pills (Letakkan ulang, Sembunyikan UI, Foto) */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleRecalibrate}
+              className="flex-1 bg-emerald-600/90 hover:bg-emerald-500 text-white font-extrabold text-xs py-2.5 px-3 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5"
+            >
+              <RotateCcw size={14} />
+              <span>{t.recalibrate || 'Letakkan ulang'}</span>
+            </button>
 
-          {/* Open 3D Detail & QRIS Checkout */}
-          <button
-            onClick={handleTriggerInspect}
-            className="flex-2 bg-gradient-to-r from-[#00A3E0] to-[#0054A6] hover:from-[#0054A6] hover:to-[#002B49] text-white font-extrabold text-xs py-3 px-4 rounded-xl shadow-[0_4px_15px_rgba(0,163,224,0.4)] transition-all active:scale-98 flex items-center justify-center gap-2"
-          >
-            <Scan size={15} className="shrink-0" />
-            <span className="truncate">
-              {activeSpot.dish 
-                ? (lang === 'id' ? 'Detail & Pesan (QRIS)' : 'Order via QRIS')
-                : (lang === 'id' ? 'Detail Arsitektur 3D' : 'View 3D Landmark Info')}
-            </span>
-          </button>
+            <button
+              onClick={() => setIsUIHidden(true)}
+              className="flex-1 bg-black/60 hover:bg-black/80 border border-white/20 text-stone-200 font-bold text-xs py-2.5 px-3 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-1.5"
+            >
+              <EyeOff size={14} />
+              <span>{t.hideUI || 'Sembunyikan UI'}</span>
+            </button>
+
+            <button
+              onClick={handleTakeSnapshot}
+              className="w-10 h-10 rounded-xl bg-black/60 hover:bg-black/80 border border-white/20 text-white flex items-center justify-center transition-all active:scale-95 shrink-0"
+              title="Foto AR"
+            >
+              <Camera size={16} />
+            </button>
+          </div>
+
+          {/* Row 2: Cultural Heritage Narrative Box */}
+          <div className="relative bg-[#001D33]/90 backdrop-blur-md border border-white/20 rounded-2xl p-3.5 space-y-2.5 shadow-2xl">
+            
+            {/* Top Toolbar inside Cultural Box */}
+            <div className="flex items-center justify-between gap-1.5 pb-2 border-b border-white/10">
+              
+              {/* ID / EN Pill */}
+              <div className="inline-flex rounded-lg bg-black/40 border border-white/15 p-0.5 text-[10px] font-bold">
+                <button
+                  onClick={() => setCurrentLang('id')}
+                  className={`px-2 py-0.5 rounded transition-all ${
+                    currentLang === 'id' ? 'bg-[#00A3E0] text-white' : 'text-stone-300'
+                  }`}
+                >
+                  ID
+                </button>
+                <button
+                  onClick={() => setCurrentLang('en')}
+                  className={`px-2 py-0.5 rounded transition-all ${
+                    currentLang === 'en' ? 'bg-[#00A3E0] text-white' : 'text-stone-300'
+                  }`}
+                >
+                  EN
+                </button>
+              </div>
+
+              {/* Action Buttons: Suara, Hadap */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => isSpeaking ? handleStopVoice() : handlePlayVoice(activeSpot.desc)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                    isSpeaking 
+                      ? 'bg-rose-600 text-white animate-pulse' 
+                      : 'bg-white/15 hover:bg-white/25 text-white border border-white/20'
+                  }`}
+                >
+                  <Volume2 size={13} className={isSpeaking ? 'text-white' : 'text-cyan-300'} />
+                  <span>{isSpeaking ? (t.stopVoice || 'Stop') : (t.voice || 'Suara')}</span>
+                </button>
+
+                <button
+                  onClick={handleRecalibrate}
+                  className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-bold flex items-center gap-1"
+                >
+                  <Compass size={13} className="text-amber-300" />
+                  <span>{t.reorient || 'Hadap'}</span>
+                </button>
+              </div>
+
+            </div>
+
+            {/* Content Details */}
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold text-amber-400 tracking-wider uppercase block">
+                INDONESIA • {activeSpot.category}
+              </span>
+              <h2 className="text-sm sm:text-base font-extrabold text-white leading-tight">
+                {activeSpot.name}
+              </h2>
+              <p className="text-[11px] sm:text-xs text-stone-200 leading-relaxed max-h-20 overflow-y-auto scrollbar-none">
+                {activeSpot.desc}
+              </p>
+            </div>
+
+            {/* Direct Action Button (QRIS or Detail) */}
+            <div className="pt-1">
+              {activeSpot.dish ? (
+                <button
+                  onClick={() => {
+                    onClose();
+                    if (onOpenQRIS) onOpenQRIS(activeSpot.dish);
+                  }}
+                  className="w-full bg-white hover:bg-stone-50 text-[#E31837] font-black text-xs py-2.5 px-4 rounded-xl shadow-lg flex items-center justify-center gap-2 active:scale-98 transition-all"
+                >
+                  <QrCode size={15} />
+                  <span>Pesan {activeSpot.dish.name} (QRIS - Rp {activeSpot.dish.price.toLocaleString('id-ID')})</span>
+                </button>
+              ) : (
+                <button
+                  onClick={handleTriggerInspect}
+                  className="w-full bg-white hover:bg-stone-50 text-[#002B49] font-black text-xs py-2.5 px-4 rounded-xl shadow-lg flex items-center justify-center gap-2 active:scale-98 transition-all"
+                >
+                  <Building2 size={15} className="text-[#0054A6]" />
+                  <span>{currentLang === 'id' ? 'Detail Filosofi & Arsitektur 3D' : '3D Architecture & Heritage Details'}</span>
+                </button>
+              )}
+            </div>
+
+          </div>
+
+          {/* Row 3: AI Voice Assistant Bar (Ref: media_1790256832096.png) */}
+          <div className="bg-black/60 backdrop-blur-md border border-white/15 rounded-xl p-2 flex items-center gap-2.5">
+            <button
+              onClick={handleAskAI}
+              className="bg-emerald-500 hover:bg-emerald-400 text-stone-900 font-extrabold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 shrink-0 active:scale-95 transition-all shadow-xs"
+            >
+              <Mic size={14} />
+              <span>Mic</span>
+            </button>
+            <div className="min-w-0 flex-1 text-[10.5px]">
+              <span className="font-bold text-white block truncate">{t.aiReady || 'AI Penglipuran siap'}</span>
+              <span className="text-stone-300 block truncate">{t.aiSub || 'Jawaban suara akan diputar otomatis.'}</span>
+            </div>
+          </div>
+
+          {/* Row 4: Landmark Selector Drawer Dropdown */}
+          <div className="pt-0.5">
+            <button
+              onClick={() => setIsSpotListOpen(!isSpotListOpen)}
+              className="w-full bg-black/60 hover:bg-black/80 border border-white/15 rounded-xl px-3 py-2 text-xs font-bold text-stone-200 flex items-center justify-between"
+            >
+              <span className="flex items-center gap-2">
+                <span>📍</span>
+                <span>{isSpotListOpen ? 'Tutup Pilihan Lokasi' : `▼ ${ALL_SPOTS.length} Titik Lokasi (${activeSpot.shortTitle})`}</span>
+              </span>
+              <ChevronDown size={14} className={`transform transition-transform ${isSpotListOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {/* Landmark Pills List */}
+            {isSpotListOpen && (
+              <div className="mt-2 flex items-center gap-1.5 overflow-x-auto scrollbar-none py-1">
+                {ALL_SPOTS.map((spot) => {
+                  const isCurrent = activeSpot.id === spot.id;
+                  return (
+                    <button
+                      key={spot.id}
+                      onClick={() => {
+                        gamelanAudio.playARBeaconPing();
+                        setActiveSpot(spot);
+                        handlePlayVoice(spot.name);
+                      }}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 ${
+                        isCurrent
+                          ? 'bg-gradient-to-r from-[#E31837] via-[#85164B] to-[#1D4ED8] text-white shadow-lg ring-2 ring-white/50 scale-102'
+                          : 'bg-black/60 hover:bg-black/80 text-stone-200 border border-white/15'
+                      }`}
+                    >
+                      <span>{spot.iconEmoji}</span>
+                      <span>{spot.shortTitle}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
 
         </div>
-
-      </div>
-
-      {/* 6. CLEAN BOTTOM INTERACTION CONSOLE & LANDMARK SELECTOR */}
-      <div className="pb-4 pt-2 px-3 sm:px-6 z-30 pointer-events-auto bg-gradient-to-t from-black/80 via-black/40 to-transparent space-y-2.5">
-        
-        {/* Horizontal Quick Landmark Switcher (Pills) */}
-        <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-1 justify-start sm:justify-center">
-          {ALL_SPOTS.map((spot) => {
-            const isCurrent = activeSpot.id === spot.id;
-            return (
-              <button
-                key={spot.id}
-                onClick={() => {
-                  gamelanAudio.playARBeaconPing();
-                  setActiveSpot(spot);
-                }}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 ${
-                  isCurrent
-                    ? 'bg-gradient-to-r from-[#E31837] to-[#B30E26] text-white shadow-lg ring-2 ring-white/40 scale-102'
-                    : 'bg-black/50 hover:bg-black/70 text-stone-200 border border-white/15'
-                }`}
-              >
-                <span>{spot.iconEmoji}</span>
-                <span>{spot.shortTitle}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Primary Indonesian Cultural Action Buttons */}
-        <div className="flex items-center gap-2 max-w-md mx-auto w-full">
-          
-          {/* Cultural Narration Audio */}
-          <button
-            onClick={() => gamelanAudio.playCulturalSpeech(activeSpot.desc)}
-            className="flex-1 bg-white/15 hover:bg-white/25 border border-white/25 text-white font-bold text-xs py-3 px-3 rounded-xl shadow-md transition-all active:scale-98 flex items-center justify-center gap-1.5"
-            title="Dengarkan Suara Budaya"
-          >
-            <Volume2 size={15} className="text-cyan-400 shrink-0" />
-            <span className="truncate">{lang === 'id' ? 'Suara Narasi' : 'Audio Guide'}</span>
-          </button>
-
-          {/* Open 3D Detail & QRIS Checkout */}
-          <button
-            onClick={handleTriggerInspect}
-            className="flex-2 bg-gradient-to-r from-[#00A3E0] to-[#0054A6] hover:from-[#0054A6] hover:to-[#002B49] text-white font-extrabold text-xs py-3 px-4 rounded-xl shadow-[0_4px_15px_rgba(0,163,224,0.4)] transition-all active:scale-98 flex items-center justify-center gap-2"
-          >
-            <Scan size={15} className="shrink-0" />
-            <span className="truncate">
-              {activeSpot.dish 
-                ? (lang === 'id' ? 'Detail & Pesan (QRIS)' : 'Order via QRIS')
-                : (lang === 'id' ? 'Detail Arsitektur 3D' : 'View 3D Landmark Info')}
-            </span>
-          </button>
-
-        </div>
-
-      </div>
+      )}
 
       {/* ========================================================================= */}
       {/* CULTURAL & ARCHITECTURAL 3D BUILDING INSPECTION MODAL                      */}

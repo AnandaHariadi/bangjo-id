@@ -33,6 +33,15 @@
   background: linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.85) 100%);
 }
 
+/* BANGJO Premium Red-to-Blue Mesh Gradient (Ref: media_1790256650332.png) */
+.bangjo-card-gradient {
+  background: linear-gradient(135deg, #EF1E28 0%, #D81B60 34%, #60269E 68%, #1D4ED8 100%);
+}
+
+.bangjo-card-gradient-vibrant {
+  background: linear-gradient(135deg, #E60023 0%, #C2185B 32%, #4A148C 65%, #1565C0 100%);
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
