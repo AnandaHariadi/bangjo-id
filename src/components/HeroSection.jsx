@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { 
   Camera, Search, MapPin, Compass, ShieldCheck, Calendar, ArrowRight, ArrowUpRight,
   ChevronRight, CheckCircle2, QrCode, Globe, Building2, BookOpen, Layers,
-  Store, Award, Navigation, Sparkles, Utensils, Smartphone, Wand2
+  Store, Award, Navigation, Sparkles, Utensils, Smartphone, Wand2, Star
 } from 'lucide-react';
 import ThreeCanvas from './ThreeCanvas';
 import { CULINARY_ITEMS } from '../data/mockData';
@@ -256,15 +256,16 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
           {/* Asymmetrical Editorial Composition: Cultural Anchor Spotlight (Left) + 4 Editorial Module Cards (Right) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
             
-            {/* Left Column: Visual Research Anchor Card */}
-            <div className="lg:col-span-5 bg-[#002B49] rounded-3xl p-7 sm:p-9 text-white relative overflow-hidden flex flex-col justify-between shadow-xl border border-white/10 group min-h-[380px]">
-              {/* Ambient Red & Blue Corner Glow */}
-              <div className="absolute -top-16 -left-16 w-48 h-48 rounded-full bg-red-500/25 blur-3xl pointer-events-none"></div>
-              <div className="absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-[#00A3E0]/25 blur-3xl pointer-events-none"></div>
+            {/* Left Column: Visual Research Anchor Card (BANGJO Signature Red-Purple-Blue Gradient) */}
+            <div className="lg:col-span-5 bangjo-card-gradient rounded-3xl p-7 sm:p-9 text-white relative overflow-hidden flex flex-col justify-between shadow-[0_25px_60px_-15px_rgba(227,24,55,0.4),0_15px_30px_rgba(29,78,216,0.3)] border border-white/20 group min-h-[380px]">
+              {/* Subtle Ambient Glowing Orbs */}
+              <div className="absolute -top-16 -left-16 w-56 h-56 rounded-full bg-red-400/35 blur-3xl pointer-events-none"></div>
+              <div className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full bg-blue-400/35 blur-3xl pointer-events-none"></div>
+              <div className="absolute top-1/2 -left-20 w-48 h-48 rounded-full bg-pink-500/20 blur-2xl pointer-events-none"></div>
               
               <div className="relative z-10 space-y-4">
-                <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider text-white border border-white/20">
-                  <Sparkles size={12} className="text-[#00A3E0]" />
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-[10px] sm:text-xs font-extrabold tracking-wider uppercase shadow-xs">
+                  <Sparkles size={12} className="text-amber-300 animate-pulse" />
                   <span>Laboratorium Spasial Budaya</span>
                 </div>
 
@@ -272,31 +273,31 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
                   Harmoni Adat, Rekayasa WebAR & Ekonomi Sirkular
                 </h3>
 
-                <p className="text-xs sm:text-sm text-stone-300 leading-relaxed font-normal">
+                <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-normal">
                   Inovasi pengabdian masyarakat internasional Informatics UPN Veteran Jawa Timur di Desa Wisata Penglipuran untuk menjaga keaslian tatanan arsitektur tradisional tanpa spanduk fisik komersial.
                 </p>
               </div>
 
               {/* Research Metrics & CTA */}
-              <div className="relative z-10 pt-6 mt-6 border-t border-white/15 space-y-6">
+              <div className="relative z-10 pt-6 mt-6 border-t border-white/20 space-y-6">
                 <div className="grid grid-cols-3 gap-2 text-center">
-                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
-                    <p className="text-base sm:text-lg font-black text-[#00A3E0]">100%</p>
-                    <p className="text-[9.5px] text-stone-300 leading-tight mt-0.5">Bebas Spanduk Fisik</p>
+                  <div className="p-2.5 rounded-xl bg-black/20 border border-white/15 backdrop-blur-xs">
+                    <p className="text-base sm:text-lg font-black text-cyan-300">100%</p>
+                    <p className="text-[9.5px] text-stone-200 leading-tight mt-0.5">Bebas Spanduk Fisik</p>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+                  <div className="p-2.5 rounded-xl bg-black/20 border border-white/15 backdrop-blur-xs">
                     <p className="text-base sm:text-lg font-black text-amber-300">7 Titik</p>
-                    <p className="text-[9.5px] text-stone-300 leading-tight mt-0.5">Beacon Spasial</p>
+                    <p className="text-[9.5px] text-stone-200 leading-tight mt-0.5">Beacon Spasial</p>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
-                    <p className="text-base sm:text-lg font-black text-emerald-400">0%</p>
-                    <p className="text-[9.5px] text-stone-300 leading-tight mt-0.5">Potongan Kas Warga</p>
+                  <div className="p-2.5 rounded-xl bg-black/20 border border-white/15 backdrop-blur-xs">
+                    <p className="text-base sm:text-lg font-black text-emerald-300">0%</p>
+                    <p className="text-[9.5px] text-stone-200 leading-tight mt-0.5">Potongan Kas Warga</p>
                   </div>
                 </div>
 
                 <a 
                   href="#festival"
-                  className="w-full bg-white hover:bg-stone-50 text-[#002B49] font-black text-xs sm:text-sm py-3.5 px-5 rounded-2xl shadow-md transition-all flex items-center justify-between group/btn active:scale-98"
+                  className="w-full bg-white hover:bg-stone-50 text-[#E31837] font-black text-xs sm:text-sm py-3.5 px-5 rounded-2xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.25)] hover:shadow-[0_14px_30px_-5px_rgba(0,0,0,0.35)] transition-all flex items-center justify-between group/btn active:scale-98"
                 >
                   <span>Mulai Eksplorasi Interaktif</span>
                   <ArrowRight size={16} className="text-[#E31837] group-hover/btn:translate-x-1.5 transition-transform" />
@@ -307,10 +308,12 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
             {/* Right Column: 4 Module Editorial Cards Grid (Matching media_1790258226133.png) */}
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
               
-              {/* 01: MODUL RITUAL (Featured Active Navy Card) */}
-              <div className="bg-[#002B49] text-white p-6 sm:p-7 rounded-3xl border border-white/10 shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                <div className="space-y-2">
-                  <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-wider text-red-300 uppercase block">
+              {/* 01: MODUL RITUAL (Vibrant Red-to-Purple Gradient Card) */}
+              <div className="bg-gradient-to-br from-[#E31837] via-[#9B1348] to-[#1D4ED8] text-white p-6 sm:p-7 rounded-3xl border border-white/20 shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+                <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+
+                <div className="relative z-10 space-y-2">
+                  <span className="font-mono text-[10px] sm:text-[11px] font-extrabold tracking-wider text-red-200 uppercase block">
                     {t.mod1Tag}
                   </span>
 
@@ -318,20 +321,20 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
                     {t.mod1Title}
                   </h3>
 
-                  {/* Horizontal Underline Accent Bar (Ref: media_1790258226133.png) */}
-                  <div className="w-10 h-1 bg-[#E31837] rounded-full my-3 group-hover:w-16 transition-all duration-300"></div>
+                  {/* Horizontal Underline Accent Bar */}
+                  <div className="w-10 h-1 bg-white rounded-full my-3 group-hover:w-16 transition-all duration-300"></div>
 
-                  <p className="text-xs text-stone-300 leading-relaxed font-normal">
+                  <p className="text-xs text-white/90 leading-relaxed font-normal">
                     {t.mod1Desc}
                   </p>
                 </div>
 
                 <a 
                   href="#festival" 
-                  className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-bold text-white group-hover:text-red-300 transition-colors"
+                  className="relative z-10 mt-6 pt-4 border-t border-white/20 flex items-center justify-between text-xs font-bold text-white group-hover:text-amber-300 transition-colors"
                 >
                   <span>{t.mod1Btn}</span>
-                  <ArrowUpRight size={18} className="text-white group-hover:text-red-300 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <ArrowUpRight size={18} className="text-white group-hover:text-amber-300 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </a>
               </div>
 
@@ -346,7 +349,7 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
                     {t.mod2Title}
                   </h3>
 
-                  {/* Horizontal Underline Accent Bar (Ref: media_1790258226133.png) */}
+                  {/* Horizontal Underline Accent Bar */}
                   <div className="w-10 h-1 bg-[#0054A6] rounded-full my-3 group-hover:w-16 transition-all duration-300"></div>
 
                   <p className="text-xs text-stone-600 leading-relaxed font-normal">
@@ -374,7 +377,7 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
                     {t.mod3Title}
                   </h3>
 
-                  {/* Horizontal Underline Accent Bar (Ref: media_1790258226133.png) */}
+                  {/* Horizontal Underline Accent Bar */}
                   <div className="w-10 h-1 bg-emerald-600 rounded-full my-3 group-hover:w-16 transition-all duration-300"></div>
 
                   <p className="text-xs text-stone-600 leading-relaxed font-normal">
@@ -391,31 +394,33 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
                 </a>
               </div>
 
-              {/* 04: SPATIAL ADVISOR (Crisp White Editorial Card) */}
-              <div className="bg-white text-stone-900 p-6 sm:p-7 rounded-3xl border border-stone-200/90 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-                <div className="space-y-2">
-                  <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-wider text-amber-700 uppercase block">
+              {/* 04: SPATIAL ADVISOR (Rich Deep Navy/Amber Colored Card) */}
+              <div className="bg-gradient-to-br from-[#002B49] via-[#0A2540] to-[#001526] text-white p-6 sm:p-7 rounded-3xl border border-amber-400/30 shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+                <div className="absolute -bottom-10 -right-10 w-36 h-36 rounded-full bg-amber-500/15 blur-2xl pointer-events-none"></div>
+
+                <div className="relative z-10 space-y-2">
+                  <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-wider text-amber-300 uppercase block">
                     {t.mod4Tag}
                   </span>
 
-                  <h3 className="text-lg sm:text-xl font-black text-[#002B49] leading-snug group-hover:text-amber-700 transition-colors">
+                  <h3 className="text-lg sm:text-xl font-black text-white leading-snug group-hover:text-amber-300 transition-colors">
                     {t.mod4Title}
                   </h3>
 
-                  {/* Horizontal Underline Accent Bar (Ref: media_1790258226133.png) */}
-                  <div className="w-10 h-1 bg-amber-600 rounded-full my-3 group-hover:w-16 transition-all duration-300"></div>
+                  {/* Horizontal Underline Accent Bar (Amber Gold) */}
+                  <div className="w-10 h-1 bg-amber-400 rounded-full my-3 group-hover:w-16 transition-all duration-300"></div>
 
-                  <p className="text-xs text-stone-600 leading-relaxed font-normal">
+                  <p className="text-xs text-stone-300 leading-relaxed font-normal">
                     {t.mod4Desc}
                   </p>
                 </div>
 
                 <a 
                   href="#advisor" 
-                  className="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between text-xs font-bold text-[#002B49] group-hover:text-amber-700 transition-colors"
+                  className="relative z-10 mt-6 pt-4 border-t border-white/15 flex items-center justify-between text-xs font-bold text-white group-hover:text-amber-300 transition-colors"
                 >
                   <span>{t.mod4Btn}</span>
-                  <ArrowUpRight size={18} className="text-stone-400 group-hover:text-amber-700 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <ArrowUpRight size={18} className="text-amber-400 group-hover:text-amber-300 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </a>
               </div>
 
@@ -471,8 +476,9 @@ export default function HeroSection({ onOpenAR, onSelectDish, onOpenQRIS, lang =
                       <span className="bg-gradient-to-r from-[#E31837] to-[#B30E26] text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-xs border border-white/20">
                         {item.origin}
                       </span>
-                      <span className="bg-black/40 text-amber-300 text-xs font-bold px-2.5 py-0.5 rounded-full backdrop-blur-md border border-white/15 shadow-inner">
-                        ★ {item.rating}
+                      <span className="bg-black/40 text-amber-300 text-xs font-bold px-2.5 py-0.5 rounded-full backdrop-blur-md border border-white/15 shadow-inner flex items-center gap-1">
+                        <Star size={11} className="fill-amber-300 text-amber-300" />
+                        <span>{item.rating}</span>
                       </span>
                     </div>
 

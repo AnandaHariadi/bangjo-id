@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CULINARY_ITEMS, MERCHANTS } from '../data/mockData';
-import { Utensils, MapPin, Layers, ChevronRight, ArrowRight, QrCode, Compass, ShieldCheck } from 'lucide-react';
+import { Utensils, MapPin, Layers, ChevronRight, ArrowRight, QrCode, Compass, ShieldCheck, Star } from 'lucide-react';
 import ThreeCanvas from './ThreeCanvas';
 import { translations } from '../utils/translations';
 
@@ -192,8 +192,9 @@ export default function CulinaryMapSection({ onSelectMerchant, onSelectDish, onO
                     <span className="bg-stone-100 text-[#002B49] text-[10px] font-bold px-2 py-0.5 rounded">
                       {m.verifiedBadge}
                     </span>
-                    <span className="text-xs font-bold text-stone-600">
-                      ★ {m.rating} ({m.reviewsCount})
+                    <span className="text-xs font-bold text-stone-600 flex items-center gap-1">
+                      <Star size={11} className="fill-amber-400 text-amber-400" />
+                      <span>{m.rating} ({m.reviewsCount})</span>
                     </span>
                   </div>
 

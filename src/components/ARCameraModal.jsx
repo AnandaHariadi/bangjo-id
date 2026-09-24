@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  X, Camera, Volume2, VolumeX, Compass, MapPin, Layers, Info, Check, 
+  X, Camera, CameraOff, Volume2, VolumeX, Compass, MapPin, Layers, Info, Check, 
   ArrowRight, QrCode, Smartphone, Eye, EyeOff, Navigation, ShieldCheck, Radio, 
   Activity, Map, Maximize2, Minimize2, Sparkles, Building2, ChevronRight, CheckCircle2,
   ChevronLeft, Sparkle, Utensils, Award, Scan, Mic, RotateCcw, ChevronDown, ChevronUp
@@ -229,6 +229,27 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     }
   };
 
+  const stopCameraStream = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      const tracks = videoRef.current.srcObject.getTracks();
+      tracks.forEach(track => track.stop());
+      videoRef.current.srcObject = null;
+    }
+    setCameraActive(false);
+  };
+
+  const toggleCamera = () => {
+    if (cameraActive) {
+      stopCameraStream();
+      setToastMessage(currentLang === 'id' ? 'Kamera video dimatikan' : 'Video camera turned off');
+      setTimeout(() => setToastMessage(null), 2000);
+    } else {
+      startCameraStream();
+      setToastMessage(currentLang === 'id' ? 'Kamera video diaktifkan' : 'Video camera turned on');
+      setTimeout(() => setToastMessage(null), 2000);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = gamelanAudio.subscribe((state) => {
       setAudioPlaying(state.isPlaying);
@@ -351,8 +372,12 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
   const toggleAudio = () => {
     if (audioPlaying) {
       gamelanAudio.stop();
+      setToastMessage(currentLang === 'id' ? 'Musik gamelan dinonaktifkan' : 'Gamelan music muted');
+      setTimeout(() => setToastMessage(null), 2000);
     } else {
       gamelanAudio.startMode('balaganjur');
+      setToastMessage(currentLang === 'id' ? 'Musik gamelan diaktifkan' : 'Gamelan music playing');
+      setTimeout(() => setToastMessage(null), 2000);
     }
   };
 
@@ -414,7 +439,7 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
     };
     const answer = aiFacts[activeSpot.id] || activeSpot.desc;
     handlePlayVoice(answer);
-    setToastMessage(currentLang === 'id' ? '🎙️ AI Budaya sedang berbicara...' : '🎙️ Cultural AI speaking...');
+    setToastMessage(currentLang === 'id' ? 'Audio narasi budaya sedang diputar...' : 'Cultural audio narration playing...');
     setTimeout(() => setToastMessage(null), 3000);
   };
 
@@ -537,29 +562,30 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
         {!cameraActive && (
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a192f] via-[#041226] to-[#010914] flex flex-col items-center justify-center p-6 text-center space-y-3 pointer-events-auto z-10">
             <div className="w-14 h-14 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shadow-lg">
-              <Camera size={28} className="text-cyan-400 animate-pulse" />
+              <CameraOff size={26} className="text-amber-300" />
             </div>
             <div>
               <p className="text-white font-bold text-sm">
-                {lang === 'id' ? 'Kamera Spasial Realtime Aktif' : 'Realtime Spatial Camera Active'}
+                {currentLang === 'id' ? 'Kamera Video Sedang Nonaktif' : 'Video Camera Inactive'}
               </p>
               <p className="text-stone-400 text-xs mt-0.5 max-w-xs">
-                {lang === 'id' 
-                  ? 'Arahkan ke bangunan atau pilih titik adat di bawah untuk melihat 3D realtime.' 
-                  : 'Point at buildings or tap landmarks below to view 3D models.'}
+                {currentLang === 'id' 
+                  ? 'Eksplorasi 3D spasial tetap aktif. Tekan tombol untuk menyalakan kamera perangkat.' 
+                  : 'Spatial 3D simulation remains active. Tap below or top bar to turn camera on.'}
               </p>
             </div>
             <button
               onClick={startCameraStream}
-              className="px-4 py-2 bg-gradient-to-r from-[#E31837] to-[#0054A6] text-white font-bold text-xs rounded-xl shadow-md active:scale-95 transition-all"
+              className="px-4 py-2 bg-gradient-to-r from-[#E31837] to-[#0054A6] hover:from-[#c2142e] hover:to-[#004182] text-white font-bold text-xs rounded-xl shadow-md active:scale-95 transition-all flex items-center gap-1.5"
             >
-              {lang === 'id' ? 'Aktifkan Kamera Perangkat' : 'Enable Device Camera'}
+              <Camera size={14} />
+              <span>{currentLang === 'id' ? 'Nyalakan Kamera Perangkat' : 'Enable Device Camera'}</span>
             </button>
           </div>
         )}
       </div>
 
-      {/* 4. CLEAN TOP BAR (Zero Distraction, No Redundant Telemetry) */}
+      {/* 4. CLEAN TOP BAR (Zero Distraction, Camera & Audio Controls, Exit) */}
       <div className="p-3 sm:p-4 flex items-center justify-between z-30 pointer-events-auto bg-gradient-to-b from-black/80 to-transparent">
         {/* Brand + Lang Toggle */}
         <div className="flex items-center gap-2">
@@ -584,14 +610,63 @@ export default function ARCameraModal({ isOpen, onClose, defaultMode = 'pokemon_
           </div>
         </div>
 
-        {/* Exit Button */}
-        <button
-          onClick={onClose}
-          className="w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all active:scale-95"
-          title="Tutup AR"
-        >
-          <X size={15} />
-        </button>
+        {/* Action Controls: Audio Toggle + Camera Toggle + Exit */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {/* Audio Toggle Button */}
+          <button
+            onClick={toggleAudio}
+            className={`px-2.5 py-1.5 rounded-full border text-xs font-semibold flex items-center gap-1.5 backdrop-blur-md transition-all active:scale-95 ${
+              audioPlaying 
+                ? 'bg-black/60 hover:bg-black/80 border-white/20 text-white' 
+                : 'bg-red-500/20 hover:bg-red-500/30 border-red-500/40 text-red-200'
+            }`}
+            title={audioPlaying ? (currentLang === 'id' ? 'Matikan Musik Adat' : 'Mute Music') : (currentLang === 'id' ? 'Nyalakan Musik Adat' : 'Play Music')}
+          >
+            {audioPlaying ? (
+              <>
+                <Volume2 size={13} className="text-amber-400" />
+                <span className="text-[10px] sm:text-[11px] font-mono tracking-tight">{currentLang === 'id' ? 'Musik On' : 'Music On'}</span>
+              </>
+            ) : (
+              <>
+                <VolumeX size={13} className="text-red-400" />
+                <span className="text-[10px] sm:text-[11px] font-mono tracking-tight text-red-300">{currentLang === 'id' ? 'Musik Off' : 'Muted'}</span>
+              </>
+            )}
+          </button>
+
+          {/* Camera Video Toggle Button */}
+          <button
+            onClick={toggleCamera}
+            className={`px-2.5 py-1.5 rounded-full border text-xs font-semibold flex items-center gap-1.5 backdrop-blur-md transition-all active:scale-95 ${
+              cameraActive 
+                ? 'bg-black/60 hover:bg-black/80 border-white/20 text-white' 
+                : 'bg-amber-500/20 hover:bg-amber-500/30 border-amber-500/40 text-amber-200'
+            }`}
+            title={cameraActive ? (currentLang === 'id' ? 'Matikan Kamera' : 'Turn off Camera') : (currentLang === 'id' ? 'Nyalakan Kamera' : 'Turn on Camera')}
+          >
+            {cameraActive ? (
+              <>
+                <Camera size={13} className="text-emerald-400" />
+                <span className="text-[10px] sm:text-[11px] font-mono tracking-tight">{currentLang === 'id' ? 'Kamera On' : 'Cam On'}</span>
+              </>
+            ) : (
+              <>
+                <CameraOff size={13} className="text-amber-400" />
+                <span className="text-[10px] sm:text-[11px] font-mono tracking-tight text-amber-300">{currentLang === 'id' ? 'Kamera Off' : 'Cam Off'}</span>
+              </>
+            )}
+          </button>
+
+          {/* Exit Button */}
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all active:scale-95 ml-0.5 sm:ml-1"
+            title={currentLang === 'id' ? 'Tutup AR' : 'Close AR'}
+          >
+            <X size={15} />
+          </button>
+        </div>
       </div>
 
       {/* 5. MAIN CONTENT AREA: 3D AR VIEWPORT (100% Focused on 3D Model, No Overlapping Badges) */}

@@ -568,7 +568,7 @@ function ThreeCanvasInner({
         // Address & Pekarangan Adat
         ctx.fillStyle = primaryColor || '#facc15';
         ctx.font = 'bold 28px "Segoe UI", Arial, sans-serif';
-        ctx.fillText(`📍 ${address}`, 512, 222);
+        ctx.fillText(address, 512, 222);
 
         // Specialty Tagline / Menu
         ctx.fillStyle = '#e2e8f0';
@@ -747,7 +747,7 @@ function ThreeCanvasInner({
           'BANGJO AR • UMKM PENGLIPURAN',
           'WARUNG IBU WAYAN MURNI',
           'Pekarangan Adat No. 14 • Jalur Utama',
-          '★ Lawar Kuwir Sakral • Nasi Campur Bali • Sambal Matah',
+          'Lawar Kuwir Sakral • Nasi Campur Bali • Sambal Matah',
           '#facc15',
           '#38bdf8',
           '#002B49'
@@ -893,7 +893,7 @@ function ThreeCanvasInner({
           'BANGJO AR • HERBAL ALAMI PENGLIPURAN',
           'KEDAI LOLOH PAK MADE',
           'Pekarangan Adat No. 22 • Hutan Bambu',
-          '★ Loloh Cemcem Asli • Khasiat Daun Alami Segar • Jamu Bali',
+          'Loloh Cemcem Asli • Khasiat Daun Alami Segar • Jamu Bali',
           '#10b981',
           '#34d399',
           '#064e3b'
@@ -1030,7 +1030,7 @@ function ThreeCanvasInner({
           'BANGJO AR • KULINER NATAH UTARA',
           'DAPUR BAMBU ASRI',
           'Pekarangan Adat No. 08 • Natah Utara',
-          '★ Sate Lilit Aroma Batang Sereh • Tipat Cantok • Base Genep',
+          'Sate Lilit Aroma Batang Sereh • Tipat Cantok • Base Genep',
           '#f59e0b',
           '#fb923c',
           '#451a03'
